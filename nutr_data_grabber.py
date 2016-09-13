@@ -1,5 +1,5 @@
 '''This is a command-line program that asks for ingredient amount, unit, and name.
-Compiles each ingredient in a .txt fiel named recipe_book.txt.
+Compiles each ingredient in a .txt file named recipe_book.txt.
 Queries an ingredient database, pulls nutritional info. for each ingredient.
 Prints cumulative nutritional info. to recipe_book.txt.'''
 
@@ -27,6 +27,7 @@ def main():
             more = input("More ingredients? (Enter 'yes' or 'no'):")
     nutr_write(tot_calories, tot_protein, tot_fat, tot_carb)
 
+#takes an ingredient as input, queries database, extract nutritional information.
 def nutr_grabber(ingredient):
     conn= sqlite3.connect('USDADataProto.db')
     try:
