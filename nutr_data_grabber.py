@@ -33,7 +33,9 @@ def nutr_grabber(ingredient):
     try:
         c = conn.cursor()
         try:
-            c.execute("select Shrt_Desc, Energ_Kcal, Protein_g, Lipid_Tot_g, Carbohydrt_g, Fiber_TD_g, Sugar_Tot_g, Calcium_mg, Iron_mg, Magnesium_mg, Sodium_mg from FoodDatabaseProto where Shrt_Desc like ?", ('%'+ingredient+'%',))
+            c.execute("select Shrt_Desc, Energ_Kcal, Protein_g, Lipid_Tot_g, Carbohydrt_g,\
+                Fiber_TD_g, Sugar_Tot_g, Calcium_mg, Iron_mg, Magnesium_mg, Sodium_mg from \
+                FoodDatabaseProto where Shrt_Desc like ?", ('%'+ingredient+'%',))
 
             row= c.fetchone()
             if row:
