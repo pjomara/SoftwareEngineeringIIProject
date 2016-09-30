@@ -120,7 +120,7 @@ def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sug
 '''This function converts the nutritional values for each nutrient in each
 ingredient from per 100 gm to what ever is called for in the recipe.
 For example, coverts nutritional information for 100 gms of flour to nutritional
-information for 2 sups flour.  If needed, units (cup, tsp, tbsp) are converted into
+information for 2 cups flour.  If needed, units (cup, tsp, tbsp) are converted into
 whatever is the most common unit for that ingredient.  For example, a recipe gives
 the flour amount in tbsp, this will be converted into cups (the most commonly
 used unit to measure flour).'''
