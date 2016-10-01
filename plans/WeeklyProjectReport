@@ -1,0 +1,12 @@
+Weekly Project Report
+
+Week ending October 1 (week 5)
+
+Progress:
+This week we completed the coding that converts the nutritional data from per 100gm to whatever is called for in the recipe.  For example, if a recipe calls for 1 tsp of salt the app will calculate the nutritional data (sodium) for 1 tsp rather than for 100 gms.  We also added several more nutrients (sugar, fat) to the print-out and all recipe data is now compiled in a single list. For this list, each separate ingredient with its nutritional data is embedded as a list within the list.  The correctly calculated nutritional data was the goal of this sprint.
+
+Next sprint:
+This is a two-week sprint with an end date of 10/15.  The main goal for thsi sprint is to get a GUI up-and-running.  Currently, we are using Visual Studio to create the GUI.  This uses C#, so the Python code will need to be re-written/ converted.  The GUI will include a drop-down for measurement unit (i.e.- tsp, cup, tbsp) and buttons for "more ingredients?" variable.  Additional goals for this sprint include adding calculator for ingredients given in ounces (oz.) and adding calculator to account for serving size.  This sprint was crafted based on discussion with our customer.
+
+Issues to be addressed:
+Using SQL to query the database returns the first 'hit' found in the database.  For example, if yo search for 'flour', the search will return 'whole wheat flour' because that is the first field contianing the word 'flour' encounted when reading the database.  Possible solution is to create a query that returns all relevant hits and lists then in a drop-down from which one can be selected.
