@@ -6,6 +6,23 @@
             all she needs to do is search for lower sugar and sodium foods. All she would need is 5 to 10 mintues to search for her
             results and present all the information on a single screen. ( USER STORY )
             
-9/26/2016 - 
+10/2/2016 - Lauren, a business woman typically works long days. She prepares lunch and dinner for her kids in advance in case she 
+            needs to stay late at work. She loves making her own reipes and wants her kids to be able to eate proper portion sizes.
+            She is happy to know all the nutritional information in one of her recipes, but she doesn't have the time to do all of 
+            the calculations to figure out the nutritional values for her meals. By adding a feature to determine portion sizes for
+            any recipe, she will be able to easily find the nutrional value for her childrens meals. ( USER STORY )
             
-            
+10/2/2016 - Meagan, an avid baker, loves to experiment with new recipes. Her recipe calls for 4 oz of vanilla extract. She wants to
+            calculate the nutrition information for her recipe so she knows how many carbohydrates are in one cookie. Her recipe makes
+            12 cookies and the serving size is one cookie. After adding a new conversion to our app that allows for the entry of ounces
+            of vanilla extract, Meagan can now watch her carb intake by knowing how many carbs are in one serving. ( USER STORY )
+
+10/2/2016 - Kevin is a car salesman who isn't very technilogically savvy when it comes to computers. He decides he wants to make a dish
+            for his fiancee. He likes an easy to use GUI. Kevin thinks that drop down menus work best for our app because it has the size
+            he needs for each ingredient. He can click the menu, drop down to the option he wants and click it rather than typing it it.
+            He thinks it is also helpful because he often has trouble typing things correctly. ( USER STORY )
+
+10/3 - 10/16
+            Create a GUI to display to the customer
+            Create conversions for Ounces
+            Design and develop a strategy to display a serving size
