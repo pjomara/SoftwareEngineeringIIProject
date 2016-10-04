@@ -1,5 +1,6 @@
 //Doesn't work as-is (sqlite connection needs formatting) and needs some cleaning
 
+
 using System;
 using Android.Views;
 using Android.Content;
@@ -21,7 +22,7 @@ namespace nutr_grabber
     {
                 string str1;
         
-                
+                // Android needs a databse to be copied from assets to a useable location
         public void copyDataBase()
         {
             var dbPath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "UsdDataProto.db");
@@ -51,6 +52,7 @@ namespace nutr_grabber
         {
             base.OnCreate(bundle);
             
+            // makes the database
               try
               {
                   copyDataBase();
@@ -83,29 +85,26 @@ namespace nutr_grabber
             var db = new SQLiteConnection(Path);
             db.CreateTable<usdProto>();
 
-            
 
             search.Click += (object sender, EventArgs e) =>
                     {
                         str1 = ingred.Text;
 
-                       // var query = db.Query<usdProto>("SELECT Energ_Kcal FROM usdProto WHERE Shrt_Desc = BUTTER");
-                        //new AlertDialog.Builder(this)
-                       // .SetMessage(query)
-                       // .Show();
-
-                        //var query = db.Table<usdProto>().Where(v => v.Shrt_Desc.Contains("BUTTER"));
-                       
-                        //foreach (var item in query)
-                        //{
-                         //   new AlertDialog.Builder(this)
-                         //           .SetMessage(item.Shrt_Desc)
-                         //           .Show();
-                        //}
+                        var query = db.Query<usdProto>("SELECT * FROM usdProto WHERE Shrt_Desc = BUTTER");
+                        
+                        foreach (var item in query)
+                        {
+                            new AlertDialog.Builder(this)
+                                    .SetMessage(item.Energ_Kcal)
+                                    .Show();
+                        }
                     };
                     
         }
 
+
+
+//----------------------------------------------------------------------------
 
         public class usdProto
         {
