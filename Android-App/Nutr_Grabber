@@ -1,5 +1,4 @@
-//Doesn't work as-is 
-
+// Does work as-is, but right now only returns 1 characteristic of an ingredient
 
 using System;
 using Android.Views;
@@ -13,6 +12,8 @@ using System.IO;
 using SQLite;
 using System.Linq;
 using Android.Database.Sqlite;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace nutr_grabber
 {
@@ -25,11 +26,11 @@ namespace nutr_grabber
                 // Android needs a databse to be copied from assets to a useable location
         public void copyDataBase()
         {
-            var dbPath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "UsdDataProto.db");
+            var dbPath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "USDADataProto.db");
 
             if (!System.IO.File.Exists(dbPath))
             {
-                var dbAssetStream = Assets.Open("UsdDataProto.db");
+                var dbAssetStream = Assets.Open("USDADataProto.db");
                 var dbFileStream = new FileStream(dbPath, FileMode.OpenOrCreate);
                 var buffer = new byte[1024];
 
@@ -52,26 +53,11 @@ namespace nutr_grabber
         {
             base.OnCreate(bundle);
             
-            // makes the database
-              try
-              {
-                  copyDataBase();
-                new AlertDialog.Builder(this)
-                      .SetMessage("Database created ...")
-                      .Show();
-            }
-              catch(Exception e)
-              {
-
-                  new AlertDialog.Builder(this)
-                      .SetMessage("Database not created ...")
-                      .Show();                  
-
-              }
-                       
+            //create the database copy
+            copyDataBase();
+            
 
             // Set our view from the "main" layout resource
-
             SetContentView(Resource.Layout.Main);
 
 
@@ -81,37 +67,39 @@ namespace nutr_grabber
             Button search = FindViewById<Button>(Resource.Id.search);
 
             //open sqlite connection, create table
-            var Path = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "UsdDataProto.db");
+            var Path = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "USDADataProto.db");
             var db = new SQLiteConnection(Path);
-            db.CreateTable<usdProto>();
+            db.CreateTable<USDADataProto>();
 
-
-            search.Click += (object sender, EventArgs e) =>
+            
+            //when you click the search button
+                search.Click += (object sender, EventArgs e) =>
                     {
                         str1 = ingred.Text;
 
-                        var query = db.Query<usdProto>("SELECT * FROM usdProto WHERE Shrt_Desc = BUTTER");
-                        
-                        foreach (var item in query)
+                        // make list from a query in the USDADataProto table. Selects evertyihg in the row where shrt_desc is equal to str1
+                        List<USDADataProto> query = db.Query<USDADataProto>("SELECT * FROM USDADataProto WHERE Shrt_Desc = ?", str1.ToUpper());
+                 
+                       foreach (var item in query)
                         {
                             new AlertDialog.Builder(this)
-                                    .SetMessage(item.Energ_Kcal)
+                                    .SetMessage("Calories:  " + item.Energ_Kcal)                       
                                     .Show();
                         }
                     };
-                    
         }
 
 
 
 //----------------------------------------------------------------------------
-
-        public class usdProto
+       
+        public class USDADataProto
         {
-            [PrimaryKey]
+           
             public int NDB_No { get; set; }
+            [PrimaryKey]
             public string Shrt_Desc { get; set; }
-            public int Energ_Kcal { get; set; }
+            public int Energ_Kcal { get; set; }           
             public int Protein_g { get; set; }
             public int Lipid_Tot_g { get; set; }
             public int Ash_g { get; set; }
@@ -160,7 +148,7 @@ namespace nutr_grabber
             public int num { get; set; }
             public int unit { get; set; }
 
-
+    
         }
 
 
