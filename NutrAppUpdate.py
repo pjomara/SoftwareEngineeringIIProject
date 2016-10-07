@@ -11,6 +11,7 @@ import sqlite3
 def main():
     recipe =[]
     title= input("Enter the recipe title: ")
+    servSize= eval(input("Enter serving size: "))
     recipe.append(title)
     title_write(title)
     more= 'yes'
@@ -35,6 +36,8 @@ def main():
             converted_ingr= convert(amount, unit, calories, protein, fat,\
                                     carbohydrates, sodium, sugar, convert_wt,\
                                     convert_num, convert_unit)
+            for i in converted_ingr:
+                i = i / float(servSize)
             ingredients = [amount, unit, ingredient, converted_ingr]            
             recipe.append(ingredients)
             recipe_write(amount, unit, description)
