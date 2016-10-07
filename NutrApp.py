@@ -180,5 +180,40 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
             converted_ing.append(round(i, 2))
         return converted_ing
 
+     if unit == "oz" and convert_unit == "tbsp":
+        for i in ing_list:
+            i = (((i / flozInTbsp)/(convert_wt/convert_num))* amount) * 100
+            converted_ing.append(round(i, 2))
+        return converted_ing
+
+    if unit == "oz" and convert_unit == "cup":
+        for i in ing_list:
+            i = (((i / flozInCup)/(convert_wt/convert_num))* amount) * 100
+            converted_ing.append(round(i, 2))
+        return converted_ing
+
+    if unit == "tbsp" and convert_unit == "oz":
+        for i in ing_list:
+            i = (((i * flozInTbsp)/(convert_wt/convert_num))* amount) * 100
+            converted_ing.append(round(i, 2))
+        return converted_ing
+
+    if unit == "cup" and convert_unit == "oz":
+        for i in ing_list:
+            i = (((i * flozInCup)/(convert_wt/convert_num))* amount) * 100
+            converted_ing.append(round(i, 2))
+        return converted_ing
+
+    if unit == "oz" and convert_unit == "lb":
+        for i in ing_list:
+            i = (((i / ozInLb)/(convert_wt/convert_num))* amount) * 100
+            converted_ing.append(round(i, 2))
+        return converted_ing
+
+    if unit == "lb" and convert_unit == "oz":
+        for i in ing_list:
+            i = (((i * ozInLb)/(convert_wt/convert_num))* amount) * 100
+            converted_ing.append(round(i, 2))
+        return converted_ing
             
 main()
