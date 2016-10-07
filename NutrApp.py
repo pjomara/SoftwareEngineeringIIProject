@@ -26,9 +26,6 @@ def main():
         ingredient = input("Enter the ingredient: ")
         if ingredient:
             ingredients =[]
-            ingredients.append(amount)
-            ingredients.append(unit)
-            ingredients.append(ingredient)
             description, calories, protein, fat, carbohydrates, sodium,\
                 sugar, convert_wt, convert_num, convert_unit=\
                 nutr_grabber(ingredient)
@@ -38,12 +35,12 @@ def main():
             ingredients = [amount, unit, ingredient, converted_ingr]            
             recipe.append(ingredients)
             recipe_write(amount, unit, description)
-            tot_calories= tot_calories + ingredients[3][0]
-            tot_protein = tot_protein + ingredients[3][1]
-            tot_fat = tot_fat + ingredients[3][2]
-            tot_carb = tot_carb + ingredients[3][3]
-            tot_sodium= tot_sodium + (ingredients[3][4]/1000)
-            tot_sugar= tot_sugar + ingredients[3][5]
+            tot_calories= tot_calories + converted_ingr[0]
+            tot_protein = tot_protein + converted_ingr[1]
+            tot_fat = tot_fat + converted_ingr[2]
+            tot_carb = tot_carb + converted_ingr[3]
+            tot_sodium= tot_sodium + converted_ingr[4]/1000
+            tot_sugar= tot_sugar + converted_ingr[5]
             more = input("More ingredients? (Enter 'yes' or 'no'):")
     nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar)
     #recipe.append(ingredients)
@@ -120,7 +117,7 @@ def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sug
 '''This function converts the nutritional values for each nutrient in each
 ingredient from per 100 gm to what ever is called for in the recipe.
 For example, coverts nutritional information for 100 gms of flour to nutritional
-information for 2 cups flour.  If needed, units (cup, tsp, tbsp) are converted into
+information for 2 sups flour.  If needed, units (cup, tsp, tbsp) are converted into
 whatever is the most common unit for that ingredient.  For example, a recipe gives
 the flour amount in tbsp, this will be converted into cups (the most commonly
 used unit to measure flour).'''
@@ -130,9 +127,6 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
     tspInCup= 48.0
     tbspInCup= 16.0
     tspInTbsp= 3.0
-    flozInCup= 8.0
-    flozInTbsp= 0.5
-    ozInLb= 16.0
 
     ing_list= [float(calories), float(protein), float(fat), float(carbohydrates)\
                , float(sodium), float(sugar)]
@@ -143,7 +137,7 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
 
     if unit == convert_unit:
         for i in ing_list:
-            i = ((i/(convert_wt/convert_num)) * amount) * 100
+            i = (i*(convert_wt/ 100.0)) * amount
             converted_ing.append(round(i, 2))
         return converted_ing
 
@@ -155,12 +149,12 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
         
     if unit == "cup" and convert_unit == "tbsp":
         for i in ing_list:
-            i = (((i* tbspInCup)/(convert_wt/convert_num))* amount) * 100
+            i = (i*(convert_wt/ 100.0))* (tbspInCup * amount)
             converted_ing.append(round(i, 2))
         return converted_ing
 
     if unit == "tsp" and convert_unit == "cup":
-        for i in ingr_list:
+        for i in ing_list:
             i = (((i/tspInCup)/(convert_wt/convert_num))* amount) * 100
             converted_ing.append(round(i, 2))
         return converted_ing
@@ -183,40 +177,5 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
             converted_ing.append(round(i, 2))
         return converted_ing
 
-     if unit == "oz" and convert_unit == "tbsp":
-        for i in ing_list:
-            i = (((i / flozInTbsp)/(convert_wt/convert_num))* amount) * 100
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "oz" and convert_unit == "cup":
-        for i in ing_list:
-            i = (((i / flozInCup)/(convert_wt/convert_num))* amount) * 100
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "tbsp" and convert_unit == "oz":
-        for i in ing_list:
-            i = (((i * flozInTbsp)/(convert_wt/convert_num))* amount) * 100
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "cup" and convert_unit == "oz":
-        for i in ing_list:
-            i = (((i * flozInCup)/(convert_wt/convert_num))* amount) * 100
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "oz" and convert_unit == "lb":
-        for i in ing_list:
-            i = (((i / ozInLb)/(convert_wt/convert_num))* amount) * 100
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "lb" and convert_unit == "oz":
-        for i in ing_list:
-            i = (((i * ozInLb)/(convert_wt/convert_num))* amount) * 100
-            converted_ing.append(round(i, 2))
-        return converted_ing
             
 main()
