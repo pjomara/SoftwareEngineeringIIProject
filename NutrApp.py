@@ -143,7 +143,7 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
 
     if unit == "cup" and convert_unit == "tsp":
         for i in ing_list:
-            i = (((i * tspInCup)/(convert_wt/convert_num))* amount) * 100
+            i = (i*(convert_wt/100.0)) * (tspInCup * amount)
             converted_ing.append(round(i, 2))
         return converted_ing
         
@@ -155,25 +155,25 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
 
     if unit == "tsp" and convert_unit == "cup":
         for i in ing_list:
-            i = (((i/tspInCup)/(convert_wt/convert_num))* amount) * 100
+            i = (i*(convert_wt/100.0))* (tspInCup * amount)
             converted_ing.append(round(i, 2))
         return converted_ing
 
     if unit == "tsp" and convert_unit == "tbsp":
         for i in ing_list:
-            i = (((i/tspInTbsp)/(convert_wt/convert_num))* amount) * 100
+            i = (i*(convert_wt/100.0))* (tspInTbsp * amount)
             converted_ing.append(round(i,2))
         return converted_ing
 
     if unit == "tbsp" and convert_unit == "cup":
         for i in ing_list:
-            i = (((i/tbspInCup)/(convert_wt/convert_num))* amount) * 100
+            i = (i*(convert_wt/100.0))/ (tbspInCup * amount)
             converted_ing.append(round(i, 2))
         return converted_ing
 
     if unit == "tbsp" and convert_unit == "tsp":
         for i in ing_list:
-            i = (((i* tspInTbsp)/(convert_wt/convert_num))*amount) * 100
+            i = (i*(convert_wt/100.0))/ (tspInTbsp * amount)
             converted_ing.append(round(i, 2))
         return converted_ing
 
