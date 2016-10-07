@@ -130,6 +130,9 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
     tspInCup= 48.0
     tbspInCup= 16.0
     tspInTbsp= 3.0
+    flozInCup= 8.0
+    flozInTbsp= 0.5
+    ozInLb= 16.0
 
     ing_list= [float(calories), float(protein), float(fat), float(carbohydrates)\
                , float(sodium), float(sugar)]
