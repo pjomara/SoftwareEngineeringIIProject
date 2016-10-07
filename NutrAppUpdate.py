@@ -13,6 +13,7 @@ def main():
     title= input("Enter the recipe title: ")
     servSize= eval(input("Enter serving size: "))
     recipe.append(title)
+    recipe.append(servSize)
     title_write(title)
     more= 'yes'
     tot_calories= float(0)
@@ -33,11 +34,9 @@ def main():
             description, calories, protein, fat, carbohydrates, sodium,\
                 sugar, convert_wt, convert_num, convert_unit=\
                 nutr_grabber(ingredient)
-            converted_ingr= convert(amount, unit, calories, protein, fat,\
+            converted_ingr= convert(amount, servSize, unit, calories, protein, fat,\
                                     carbohydrates, sodium, sugar, convert_wt,\
                                     convert_num, convert_unit)
-            for i in converted_ingr:
-                i = i / float(servSize)
             ingredients = [amount, unit, ingredient, converted_ingr]            
             recipe.append(ingredients)
             recipe_write(amount, unit, description)
@@ -127,7 +126,7 @@ information for 2 cups flour.  If needed, units (cup, tsp, tbsp) are converted i
 whatever is the most common unit for that ingredient.  For example, a recipe gives
 the flour amount in tbsp, this will be converted into cups (the most commonly
 used unit to measure flour).'''
-def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
+def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodium, sugar\
             , convert_wt, convert_num, convert_unit):
     #Convert factors
     tspInCup= 48.0
@@ -145,48 +144,56 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
     if unit == convert_unit:
         for i in ing_list:
             i = ((i/(convert_wt/convert_num)) * amount) * 100
+            i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
 
     if unit == "cup" and convert_unit == "tsp":
         for i in ing_list:
             i = (((i * tspInCup)/(convert_wt/convert_num))* amount) * 100
+            i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
         
     if unit == "cup" and convert_unit == "tbsp":
         for i in ing_list:
             i = (((i* tbspInCup)/(convert_wt/convert_num))* amount) * 100
+            i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
 
     if unit == "tsp" and convert_unit == "cup":
         for i in ingr_list:
             i = (((i/tspInCup)/(convert_wt/convert_num))* amount) * 100
+            i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
 
     if unit == "tsp" and convert_unit == "tbsp":
         for i in ing_list:
             i = (((i/tspInTbsp)/(convert_wt/convert_num))* amount) * 100
+            i = i / float(servSize)
             converted_ing.append(round(i,2))
         return converted_ing
 
     if unit == "tbsp" and convert_unit == "cup":
         for i in ing_list:
             i = (((i/tbspInCup)/(convert_wt/convert_num))* amount) * 100
+            i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
 
     if unit == "tbsp" and convert_unit == "tsp":
         for i in ing_list:
             i = (((i* tspInTbsp)/(convert_wt/convert_num))*amount) * 100
+            i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
 
     if unit == "cup" and convert_unit == "ounce":
         for i in ing_list:
             i = (((i/cupInOunce)/(convert_wt/convert_num))*amount) *100
+            i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
 
