@@ -1,0 +1,8 @@
+This app creates a copy of a database in the internal memory of the phone (Android cannot use just an asset in the folder).
+
+It then opens a connection to the database.
+
+When the search button is clicked, it queries the database and stores the nutritional info as a list.
+
+It then passes that info, one at a time, to a new Activity (what you see on the phone at any given time, i.e a new page) 
+where it then converts that info into a list view for easier viewing.
