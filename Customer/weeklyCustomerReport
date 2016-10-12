@@ -5,7 +5,7 @@ Weekly customer reports
             and them being able to have acess to their app. For this week, I expect them to have a GUI that shows an actual page
             and some sort of login screen. If they can not reach either goal, I at least expect a prototype GUI that demonstrates
             the vision of their application.
-
+ 
 10/05/2016 - The state of the Booze Clues application is good as of now. From what I've been shown, the group as a whole have a clear
              understanding of what needs to be done. They showed me a working prototype, though it was simple as a login screen GUI.
              The login screen brings you into their main page, giving you options for either resturants or bars. The Booze Clues developers
@@ -13,3 +13,10 @@ Weekly customer reports
              GUI is a work in progress,they showed me a drop down search bar and a click box option for bars and resturatns. For next week,my
              priorities are for the developers of Booze Clues to implement actual locations of bars and resturatns in Plattsburgh. I should be
              able to choose either bars or resturants and have access to what Plattsburgh has to offer in terms of location and name.
+
+10/12/2016 - The state of Booze Clues is stagnating a tiny bit. From what I was told, the programer of the group implemented locations of
+             both bars and resturants, which followed my last weeks agenda goals. Unfortunately, the lastest program they showed me 
+             wasn't working properly, as it failed show me locations of bars and resturants in Plattsburgh. I can tell by the honesty of the
+             programmer that they followed my last weeks agenda as best as possible and said fixing the bug would be an easy task. For next week
+             I prioritized they focus on fixing the bug prevent the pop ups on locations, plus add a history database to prevent backtracking.
+             A history database would help me with past searches, giving me the ease of returning to a previous location of interest.
