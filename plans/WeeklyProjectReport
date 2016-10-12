@@ -10,3 +10,11 @@ This is a two-week sprint with an end date of 10/15.  The main goal for this spr
 
 Issues to be addressed:
 Using SQL to query the database returns the first 'hit' found in the database.  For example, if you search for 'flour', the search will return 'whole wheat flour' because that is the first field containing the word 'flour' encounted when reading the database.  One possible solution is to create a query that returns all relevant hits and lists then in a drop-down from which one can be selected.
+
+week ending October 8 (week 6)
+
+Progress:
+Worked on coding to convert ingredients given in ounces.  Completed testing and made corrections to converter function.
+
+Sprint:
+In week two of two-week sprint.  Goals for sprint are to complete a GUI.
