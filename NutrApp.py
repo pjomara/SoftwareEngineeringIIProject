@@ -146,7 +146,7 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
 
     if unit == "cup" and convert_unit == "tsp":
         for i in ing_list:
-            i = (i*(convert_wt/100.0)) * (tspInCup * amount)
+            i = ((i*(convert_wt/100.0)) * (tspInCup) * amount)
             converted_ing.append(round(i, 2))
         return converted_ing
         
