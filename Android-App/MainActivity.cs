@@ -1,3 +1,5 @@
+//fixed error where "unit" would not be returned correctly
+
 using System;
 using Android.Views;
 using Android.Content;
@@ -73,31 +75,33 @@ namespace nutr_grabber
             //when you click the search button
                 search.Click += (object sender, EventArgs e) =>
                     {
+                        //formats input text
                         str1 = ingred.Text;
                         str1 = str1.TrimEnd();
                         str1 = str1.ToUpper();
                         
 
-                        // make list from a query in the USDADataProto table. Selects evertyihg in the row where shrt_desc is equal to str1
+                        // make list from a query in the USDADataProto table. Selects everything in the row where shrt_desc is equal to str1
                         List<USDADataProto> query = db.Query<USDADataProto>("SELECT * FROM USDADataProto WHERE Shrt_Desc = ?", str1);
 
+                       
+                        // sets the intent to pass the info to listdisplay activity
                         var second = new Intent(this, typeof(ListDisplay));
-                        
-                        
+
+
+                     
                         foreach (var item in query)
                         {
-                            /*
-                            new AlertDialog.Builder(this)
-                                    .SetMessage("Calories:  " + item.Energ_Kcal + " per "  + item.num + " " + Convert.ToString(item.unit))                       
-                                    .Show();*/
-                                  
+                                                              
                             second.PutExtra("name", Convert.ToString(item.Shrt_Desc));
                             second.PutExtra("Kcal", Convert.ToString(item.Energ_Kcal));
                             second.PutExtra("protein", Convert.ToString(item.Protein_g));
                             second.PutExtra("fat", Convert.ToString(item.Lipid_Tot_g));
                             second.PutExtra("carbs", Convert.ToString(item.Carbohydrt_g));
                             second.PutExtra("sodium", Convert.ToString(item.Sodium_mg));
-                            second.PutExtra("sugar", Convert.ToString(item.Sugar_Tot_g));                   
+                            second.PutExtra("sugar", Convert.ToString(item.Sugar_Tot_g));
+                            second.PutExtra("num", Convert.ToString(item.num));
+                            second.PutExtra("unit", item.unit);                 
                             StartActivity(second);
                             
                         }
@@ -161,7 +165,7 @@ namespace nutr_grabber
             public int Cholestrl_mg { get; set; }
             public int Gm_unit { get; set; }
             public int num { get; set; }
-            public int unit { get; set; }
+            public string unit { get; set; }
 
     
         }
