@@ -31,9 +31,15 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
         convert_val = convert_wt / 100
         
         for i in ing_list:
-            i = i * convert_val
-            converted_ing.append(round(i, 2))
-        return converted_ing
+****        if ing_list[i] = sodium
+                i = (i / 1000) * convert_val
+                i = i * 10000
+                converted_ing.append(round(i, 2))
+                return converted_ing
+            else:
+                i = i * convert_val
+                converted_ing.append(round(i, 2))
+                return converted_ing
         
     if unit == "cup" and convert_unit == "tsp":
     
