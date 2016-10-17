@@ -13,6 +13,7 @@ def main():
     title= input("Enter the recipe title: ")
     servSize= eval(input("Enter the serving size: "))
     recipe.append(title)
+    recipe.append(servSize)
     title_write(title)
     more= 'yes'
     tot_calories= float(0)
@@ -21,7 +22,6 @@ def main():
     tot_carb= float(0)
     tot_sodium= float(0)
     tot_sugar= float(0)
-    servSize= float(0)
     while more == 'yes':
         amount = eval(input("Enter amount: "))
         unit = input("Enter the unit(I.E.- cup, tsp); ")
@@ -31,7 +31,7 @@ def main():
             description, calories, protein, fat, carbohydrates, sodium,\
                 sugar, convert_wt, convert_num, convert_unit=\
                 nutr_grabber(ingredient)
-            converted_ingr= convert(amount, unit, calories, protein, fat,\
+            converted_ingr= convert(amount, servSize, unit, calories, protein, fat,\
                                     carbohydrates, sodium, sugar, convert_wt,\
                                     convert_num, convert_unit)
             ingredients = [amount, unit, ingredient, converted_ingr]            
@@ -44,11 +44,6 @@ def main():
             tot_sodium= tot_sodium + converted_ingr[4]/1000
             tot_sugar= tot_sugar + converted_ingr[5]
             more = input("More ingredients? (Enter 'yes' or 'no'):")
-            
-def servingSize(ingredient):
-    serving_size = ingredients/servSize
-    return serving_size
-
     nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar)
     #recipe.append(ingredients)
     num_ingr = len(recipe)-1
@@ -128,7 +123,7 @@ information for 2 sups flour.  If needed, units (cup, tsp, tbsp) are converted i
 whatever is the most common unit for that ingredient.  For example, a recipe gives
 the flour amount in tbsp, this will be converted into cups (the most commonly
 used unit to measure flour).'''
-def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
+def convert(amount, servSize unit, calories, protein, fat, carbohydrates, sodium, sugar\
             , convert_wt, convert_num, convert_unit):
     #Convert factors
     tspInCup= 48.0
@@ -153,6 +148,7 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
         
         for i in ing_list:
             i = i * convert_val
+            i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
 
@@ -163,6 +159,7 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
         
         for i in ing_list:
             i = i * convert_val
+            i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
         
@@ -173,6 +170,7 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
         
         for i in ing_list:
             i = i * convert_val
+            i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
 
@@ -183,6 +181,7 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
         
         for i in ing_list:
             i = i * convert_val
+            i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
 
@@ -193,6 +192,7 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
 
         for i in ing_list:
             i = i * convert_val
+            i = i / float(servSize)
             converted_ing.append(round(i,2))
         return converted_ing
 
@@ -203,6 +203,7 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
     
         for i in ing_list:
             i = i * convert_val
+            i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
 
@@ -213,6 +214,7 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
     
         for i in ing_list:
             i = i * convert_val
+            i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
 
@@ -223,6 +225,7 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
     
         for i in ing_list:
             i = i * convert_val
+            i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
 
@@ -233,6 +236,7 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
     
         for i in ing_list:
             i = i * convert_val
+            i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
 
@@ -243,6 +247,7 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
     
         for i in ing_list:
             i = i * convert_val
+            i = i / float(servSize)
             converted_ing.append(round(i,2))
         return converted_ing
 
@@ -253,6 +258,7 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
     
         for i in ing_list:
             i = i * convert_val
+            i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
 
@@ -263,6 +269,7 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
     
         for i in ing_list:
             i = i * convert_val
+            i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
 
@@ -273,6 +280,7 @@ def convert(amount, unit, calories, protein, fat, carbohydrates, sodium, sugar\
     
         for i in ing_list:
             i = i * convert_val
+            i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
     
