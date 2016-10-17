@@ -18,3 +18,13 @@ Worked on coding to convert ingredients given in ounces.  Completed testing and 
 
 Sprint:
 In week two of two-week sprint.  Goals for sprint are to complete a GUI.
+
+Progress report for week ending 10/15
+
+We completed most of the tasks listed in the last sprint (ending 10/14).  We now have a working prototype that takes command-line input of ingredients with unit and amount. The conversion function has been completed; nutritional information is now being reported corresponding the amount entered (IE- 1 cup of flour is reported as 1 cup of flour rather than 100 gms of flour).  The app output is a txt file containing the ingredients including amounts and units plus the total nutritional content of the recipe including calories, protein, sodium, fat, and sugar.
+
+Additonal functions added are converter for ingredients added in ounces and a "serving size" function.
+
+The user interface is being developed using Visual Studio but is not yet fully functional.  Currently it has been developed to the point that an ingredient, unit , and amount can be input and the nutritional information from the database will be returned.
+
+The next sprint (ending 10/29) includes continued development of the user interface (this includes conversion of the Python code to C#), a function to save recipes, better formatting of the nutritional label, and extensive testing of the converter function.
