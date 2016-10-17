@@ -1,0 +1,44 @@
+//code for setting the physical buttons and appearance of screen
+//added "spinner" to only allow desired units
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <TextView
+        android:text="Enter the Amount:"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textAmount" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/enterAmount"
+        android:layout_marginBottom="11.0dp" />
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="38.0dp"
+        android:id="@+id/unitSpinner"
+        android:layout_marginBottom="11.0dp"
+        android:layout_marginTop="6.5dp"
+        android:tag="Unit" />
+    <TextView
+        android:text="Enter Ingredient:"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textIngred" />
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/autoCompIngred" />
+    <Button
+        android:text="Search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/search" />
+</LinearLayout>
