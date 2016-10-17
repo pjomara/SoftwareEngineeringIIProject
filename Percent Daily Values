@@ -1,0 +1,27 @@
+Information from: http://dsld.nlm.nih.gov/dsld/dailyvalue.jsp
+
+Daily Values:
+
+  Total fat: 65 grams (g)
+
+  Cholesterol: 300 milligrams (mg)
+
+  Sodium: 2,400 milligrams (mg)
+
+  Carbohydrate: 300 grams (g)
+
+  Protein: 50 grams (g)
+
+  Calories: 2000 calories (cal)
+
+Calculations:
+
+tot_fat_dv = 65.0
+chol_dv = 300.0
+sodium_dv = 2400.0
+carb_dv = 300.0
+prot_dv = 50.0
+cal_dv = 2000.0
+
+total_fat_dv = i / total_fat_dv
+chol_dv
