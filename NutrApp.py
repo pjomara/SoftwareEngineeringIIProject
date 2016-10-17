@@ -123,7 +123,7 @@ information for 2 sups flour.  If needed, units (cup, tsp, tbsp) are converted i
 whatever is the most common unit for that ingredient.  For example, a recipe gives
 the flour amount in tbsp, this will be converted into cups (the most commonly
 used unit to measure flour).'''
-def convert(amount, servSize unit, calories, protein, fat, carbohydrates, sodium, sugar\
+def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodium, sugar\
             , convert_wt, convert_num, convert_unit):
     #Convert factors
     tspInCup= 48.0
