@@ -11,6 +11,7 @@ import sqlite3
 def main():
     recipe =[]
     title= input("Enter the recipe title: ")
+    servSize= eval(input("Enter the serving size: "))
     recipe.append(title)
     title_write(title)
     more= 'yes'
@@ -20,6 +21,7 @@ def main():
     tot_carb= float(0)
     tot_sodium= float(0)
     tot_sugar= float(0)
+    servSize= float(0)
     while more == 'yes':
         amount = eval(input("Enter amount: "))
         unit = input("Enter the unit(I.E.- cup, tsp); ")
@@ -42,6 +44,11 @@ def main():
             tot_sodium= tot_sodium + converted_ingr[4]/1000
             tot_sugar= tot_sugar + converted_ingr[5]
             more = input("More ingredients? (Enter 'yes' or 'no'):")
+            
+def servingSize(ingredient):
+    serving_size = ingredients/servSize
+    return serving_size
+
     nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar)
     #recipe.append(ingredients)
     num_ingr = len(recipe)-1
