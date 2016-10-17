@@ -1,4 +1,5 @@
 //fixed error where "unit" would not be returned correctly
+// added spinner and additional views
 
 using System;
 using Android.Views;
@@ -62,8 +63,12 @@ namespace nutr_grabber
 
 
             //set widgets
-            TextView message = FindViewById<TextView>(Resource.Id.message);
-            EditText ingred = FindViewById<EditText>(Resource.Id.enterHere);
+            TextView message = FindViewById<TextView>(Resource.Id.textAmount);
+            EditText amount = FindViewById<EditText>(Resource.Id.enterAmount);
+            Spinner unitSpin = FindViewById<Spinner>(Resource.Id.unitSpinner);
+            TextView message2 = FindViewById<TextView>(Resource.Id.textIngred);
+            AutoCompleteTextView autoIngred = FindViewById<AutoCompleteTextView>(Resource.Id.autoCompIngred);
+           
             Button search = FindViewById<Button>(Resource.Id.search);
 
             //open sqlite connection, create table
@@ -76,7 +81,7 @@ namespace nutr_grabber
                 search.Click += (object sender, EventArgs e) =>
                     {
                         //formats input text
-                        str1 = ingred.Text;
+                        str1 = autoIngred.Text;
                         str1 = str1.TrimEnd();
                         str1 = str1.ToUpper();
                         
