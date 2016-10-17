@@ -26,3 +26,24 @@
             Create a GUI to display to the customer
             Create conversions for Ounces
             Design and develop a strategy to display a serving size
+
+10/16/2016 -John is a single Dad who gets to see his son on weekends. He knows his son loves his home made Mac 'n Cheese but he likes to
+            watch what he eats. He likes how the program works but his son is used to the nutrition labels found on boxes. His son would
+            prefer to print his very own nutritional label that looks just like the ones at the store. By changing the way our program 
+            prints, John's son can print out his nutrition label and show it to his friends. ( USER STORY )
+            
+10/16/2016 -Sara works two jobs and has to prep all of her meals in advance. She is a diabetic and has to watch her carbohydrate intake.
+            She likes using our application because it currently shows her how many carbs are in each ingredient. With an addition to our
+            interface, she will be able to see the total carbs in a complete dish that she creates. Instead of her having to go through
+            and count the carbs by each ingredient, she will be able to view the nutrition information for her entire recipe. The 
+            nutrition information helps her make sure she counts her carbohydrates correctly and save time. ( USER STORY )
+            
+10/16/2016 -Raymond is a retired chef who enjoys cooking for his family. He has all of his favorite recipes saved in a file cabinet in
+            his house. Every time he wants to make a dish, he searched through his files and finds the recipe hes looking for to cook.
+            Our app helps him by showing him not only the nutrition information, but also allowing him to save recipes so he can more
+            easily access them. ( USER STORY )
+            
+10/16/2016 
+            Print out in nutrition label format
+            Add more to the interface
+            Save recipes to a database
