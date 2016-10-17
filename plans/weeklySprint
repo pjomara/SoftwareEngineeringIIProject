@@ -6,3 +6,9 @@ Sprint for week of 9/24- 10/8
   -By end of sprint have a working prototype that calculates correct nutrition information for each ingredient in recipe.
   Complete recipe information (ingredients and nutritional information) pritns to a .txt file and is saved in a list.
   
+sprint ending 10/29
+- Continue development of user interface
+- Continue converting Python code into C#
+- Add function to save recipes
+- Add nutritional information formatting
+- Conduct extensive testing on conversion functions
