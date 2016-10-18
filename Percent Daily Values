@@ -23,5 +23,22 @@ carb_dv = 300.0
 prot_dv = 50.0
 cal_dv = 2000.0
 
-total_fat_dv = i / total_fat_dv
-chol_dv
+for i in ing_list:
+  
+  if i = 0
+    cal_dv = i / cal_dv
+    
+  if i = 1
+    prot_dv = i / prot_dv
+    
+  if i = 2
+    total_fat_dv = i / total_fat_dv
+    
+  if i = 3
+    carb_dv = i / carb_dv
+    
+  if i = 4
+    sodium_dv = i / sodium_dv
+  
+  if i =5
+    chol_dv = i / chol_dv
