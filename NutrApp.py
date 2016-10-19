@@ -108,7 +108,7 @@ def recipe_write(amount, unit, description):
     #fixed 9/29
 def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar):
     recipe= open("recipe_book.txt", "a")
-    print ("\n","Nutritional information", file=recipe)
+    print ("Nutritional information", file=recipe)
     print ("calories: ",round(tot_calories,0), file=recipe)
     print ("Protein: ", round(tot_protein, 2),' gm', file=recipe)
     print ("Fat: ", round(tot_fat, 2), ' gm', file=recipe)
