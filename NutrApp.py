@@ -14,7 +14,7 @@ def main():
     servSize= eval(input("Enter the serving size: "))
     recipe.append(title)
     recipe.append(servSize)
-    title_write(title)
+    title_write(title, servSize)
     more= 'yes'
     tot_calories= float(0)
     tot_protein= float(0)
@@ -91,9 +91,10 @@ def nutr_grabber(ingredient):
     return description, calories, protein, fat, carbohydrates, sodium, sugar, convert_wt, convert_num, convert_unit
 
 #prints title of recipe to recipe_book.txt
-def title_write(title):
+def title_write(title, servSize):
     recipe= open("recipe_book.txt", "a")
     print (title, file=recipe)
+    print ("Service size: ", servSize, file=recipe)
     recipe.close()
 
 #prints amount, unit, and ingredient to recipe_book.txt
