@@ -9,7 +9,8 @@ def recipe_write_dbase(title):
     try:
         c= conn.cursor()
         try:
-            c.execute("INSERT INTO recipe (recipe_title) VALUES (title);")
+            c.execute("INSERT INTO recipe (recipe_title) VALUES (?)", (title,))
+            conn.commit()
         finally:
             c.close()
 
