@@ -109,6 +109,13 @@ def recipe_write(amount, unit, description):
 def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar):
     recipe= open("recipe_book.txt", "a")
     
+    tot_fat_dv = 65.0
+    chol_dv = 300.0
+    sodium_dv = 2400.0
+    carb_dv = 300.0
+    prot_dv = 50.0
+    cal_dv = 2000.0
+    
     #Calculates the % Daily Value for the serving size            
     for i in ing_list:
         if i = 0
