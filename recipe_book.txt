@@ -1,0 +1,26 @@
+test_recipe
+Service size:  2
+recipe_test2
+Service size:  2
+recipe_test3
+Service size:  2
+recipe_test4
+Service size:  2
+recipe_test5
+Service size:  2
+recipe_test6
+Service size:  2
+recipe_test7
+Service size:  2
+recipe_test8
+Service size:  2
+recipe_test9
+Service size:  2
+1   cup   WHOLE WHEAT FLOUR
+Nutritional information
+calories:  247.0
+Protein:  8.21  gm
+Fat:  1.14  gm
+Carbohydrates:  49.68  gm
+Sodium:  0.0  mg
+Sugar:  0.21  gm

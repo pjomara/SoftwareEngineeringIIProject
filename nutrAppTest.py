@@ -12,6 +12,7 @@ def main():
     recipe =[]
     title= input("Enter the recipe title: ")
     servSize= eval(input("Enter the serving size: "))
+    recipe_write_dbase(title)
     recipe.append(title)
     recipe.append(servSize)
     title_write(title, servSize)
@@ -34,6 +35,8 @@ def main():
             converted_ingr= convert(amount, servSize, unit, calories, protein, fat,\
                                     carbohydrates, sodium, sugar, convert_wt,\
                                     convert_num, convert_unit)
+            recipe_id= id_grabber(title)
+            ingredient_write_dbase(recipe_id, amount, unit, converted_ingr)
             ingredients = [amount, unit, ingredient, converted_ingr]            
             recipe.append(ingredients)
             recipe_write(amount, unit, description)
@@ -287,6 +290,7 @@ def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodiu
 '''The following functions write recipe information to two separate databases,
 recipe.sqlite and ingredients.sqlite.'''
 
+#adds recipe title and generates recipe_id.
 def recipe_write_dbase(title):
     conn= sqlite3.connect("recipe.sqlite")
     try:
@@ -301,6 +305,7 @@ def recipe_write_dbase(title):
     finally:
         conn.close()
 
+#Grabs recipe_id to be used as key for ingredients.
 def id_grabber(title):
     conn= sqlite3.connect("recipe.sqlite")
     try:
@@ -321,13 +326,16 @@ def id_grabber(title):
 
     return recipe_id
 
+#Writes ingredients to ingredients.sqlite.  Also adds recipe_id so ingredients can
+#be retrieved.
 def ingredient_write_dbase(recipe_id, amount, unit, converted_ingr):
+    calories, protein, fat, carbohydrates, sodium, sugar= converted_ingr
     conn= sqlite3.connect("ingredients.sqlite")
     try:
         c=conn.cursor()
         try:
-            c.execute("INSERT INTO ingredients (recipe_id, amount, unit, converted_ingr)\
-                      VALUES (?, ?, ?, ?)", (recipe_id, amount, unit, converted_ing,))
+            c.execute("INSERT INTO ingredient (recipe_id, amount, unit, calories, protein, fat, carbohydrates, sodium, sugar)\
+                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (recipe_id, amount, unit, calories, protein, fat, carbohydrates, sodium, sugar,))
             conn.commit()
         finally:
             c.close()
