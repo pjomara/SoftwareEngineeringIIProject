@@ -14,7 +14,7 @@ def main():
     servSize= eval(input("Enter the serving size: "))
     recipe.append(title)
     recipe.append(servSize)
-    title_write(title)
+    title_write(title, servSize)
     more= 'yes'
     tot_calories= float(0)
     tot_protein= float(0)
@@ -22,14 +22,6 @@ def main():
     tot_carb= float(0)
     tot_sodium= float(0)
     tot_sugar= float(0)
-    
-    tot_fat_dv = 65.0
-    chol_dv = 300.0
-    sodium_dv = 2400.0
-    carb_dv = 300.0
-    prot_dv = 50.0
-    cal_dv = 2000.0
-
     while more == 'yes':
         amount = eval(input("Enter amount: "))
         unit = input("Enter the unit(I.E.- cup, tsp); ")
@@ -52,23 +44,7 @@ def main():
             tot_sodium= tot_sodium + converted_ingr[4]/1000
             tot_sugar= tot_sugar + converted_ingr[5]
             more = input("More ingredients? (Enter 'yes' or 'no'):")
-            
-#Calculates the % Daily Value for the serving size            
-    for i in ing_list:
-        if i = 0
-            cal_dv = tot_calories / cal_dv
-        if i = 1
-            prot_dv = tot_protein / prot_dv 
-        if i = 2
-            total_fat_dv = tot_fat / total_fat_dv
-        if i = 3
-            carb_dv = tot_carb / carb_dv
-        if i = 4
-            sodium_dv = tot_sodium / sodium_dv
-        i += 1
-        
-    nutr_write(cal_dv, prot_dv, total_fat_dv, carb_dv, sodium_dv, tot_sugar)
-
+    nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar)
     #recipe.append(ingredients)
     num_ingr = len(recipe)-1
     recipe.append(num_ingr)
@@ -115,9 +91,10 @@ def nutr_grabber(ingredient):
     return description, calories, protein, fat, carbohydrates, sodium, sugar, convert_wt, convert_num, convert_unit
 
 #prints title of recipe to recipe_book.txt
-def title_write(title):
+def title_write(title, servSize):
     recipe= open("recipe_book.txt", "a")
     print (title, file=recipe)
+    print ("Service size: ", servSize, file=recipe)
     recipe.close()
 
 #prints amount, unit, and ingredient to recipe_book.txt
@@ -131,13 +108,27 @@ def recipe_write(amount, unit, description):
     #fixed 9/29
 def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar):
     recipe= open("recipe_book.txt", "a")
-    print ("\n","Nutritional information", file=recipe)
-    print ("calories: ",round(tot_calories,0), file=recipe)
-    print ("Protein: ", round(tot_protein, 2),' gm', file=recipe)
-    print ("Fat: ", round(tot_fat, 2), ' gm', file=recipe)
-    print ("Carbohydrates: ", round(tot_carb, 2),' gm', file=recipe)
-    print ("Sodium: ", round(tot_sodium, 2),' mg', file=recipe)
-    print ("Sugar: ", round(tot_sugar, 2),' gm', file=recipe)
+    
+    #Calculates the % Daily Value for the serving size            
+    for i in ing_list:
+        if i = 0
+            cal_dv = tot_calories / cal_dv
+        if i = 1
+            prot_dv = tot_protein / prot_dv 
+        if i = 2
+            total_fat_dv = tot_fat / total_fat_dv
+        if i = 3
+            carb_dv = tot_carb / carb_dv
+        if i = 4
+            sodium_dv = tot_sodium / sodium_dv
+        
+    print ("Nutritional information", "\t \t", "% DV",file=recipe)
+    print ("calories: ",round(tot_calories,0), "\t \t", round(cal_dv,0), "%", file=recipe)
+    print ("Protein: ", round(tot_protein, 2),' gm',"\t \t", round(prot_dv,0), "%", file=recipe)
+    print ("Fat: ", round(tot_fat, 2), ' gm', "\t \t", round(tot_fat_dv,0), "%",file=recipe)
+    print ("Carbohydrates: ", round(tot_carb, 2),' gm', "\t \t", round(carb_dv,0), "%",file=recipe)
+    print ("Sodium: ", round(tot_sodium, 2),' mg', "\t \t", round(sodium_dv,0), "%",file=recipe)
+    print ("\t", "Sugar: ", round(tot_sugar, 2),' gm', file=recipe)
     recipe.close()
     
 '''This function converts the nutritional values for each nutrient in each
