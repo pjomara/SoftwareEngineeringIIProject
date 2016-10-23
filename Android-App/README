@@ -1,8 +1,13 @@
-This app creates a copy of a database in the internal memory of the phone (Android cannot use just an asset in the folder).
+This app searches the USDA food database for a user-entered ingredient and returns nutritional information about it.
 
-It then opens a connection to the database.
+It uses a Spinner for the units so the user can not enter anything except a usable unit.
 
-When the search button is clicked, it queries the database and stores the nutritional info as a list.
+It also uses an auto-complete text-bar to help users find the correct ingredient, as well as helping not enter the wrong format 
+and help with spelling errors.
+
+It creates a copy of the database in the internal memory of the phone.
+
+When the search button is clicked, it queries the database and stores the nutritional info of the ingredient as a list.
 
 It then passes that info, one at a time, to a new Activity (what you see on the phone at any given time, i.e a new page) 
 where it then converts that info into a list view for easier viewing.
