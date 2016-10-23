@@ -1,0 +1,14 @@
+//This simply contains the items to populate the unit selection drown-down button.
+
+<?xml version="1.0" encoding="utf-8" ?> 
+<resources>
+    <string name="unit_prompt">Choose a unit:</string>
+    <string-array name="units_array">
+      <item>Select a unit:</item>
+        <item>tsp</item>
+        <item>tbsp</item>
+        <item>cup</item>
+        <item>fl.oz</item>
+        <item>lb</item>
+    </string-array>
+</resources>
