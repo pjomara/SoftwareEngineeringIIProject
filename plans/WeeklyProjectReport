@@ -28,3 +28,7 @@ Additonal functions added are converter for ingredients added in ounces and a "s
 The user interface is being developed using Visual Studio but is not yet fully functional.  Currently it has been developed to the point that an ingredient, unit , and amount can be input and the nutritional information from the database will be returned.
 
 The next sprint (ending 10/29) includes continued development of the user interface (this includes conversion of the Python code to C#), a function to save recipes, better formatting of the nutritional label, and extensive testing of the converter function.
+
+Progress report for week ending 10/22
+
+We did not complete many tasks this past week but we made progress on each item in the bi-weekly sprint.  We are working on the coding to make the nutritional labels fit a more standard format.  We continue to work on the user interface and we have a working prototype of the recipe-saving functionality.  Two items completed but not included in the sprint are converters for ounces and a "serving size" feature.  The serving size features asks the user for serving size when they create a new recipe.  All the nutritional values are then divided by the serving size.
