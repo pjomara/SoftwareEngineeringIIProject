@@ -1,7 +1,9 @@
-//fixed error where "unit" would not be returned correctly
-// added spinner and additional views
+//Added a Unit Spinner so that users cannot enter an un-usable unit.
+//Added an auto-complete ingredient selection so that users can see the different options for their ingredient
+//and have it properly formatted.
+//Also added a new text view (it just makes it looka  little nicer.)
 
-using System;
+uusing System;
 using Android.Views;
 using Android.Content;
 using Android.Runtime;
@@ -22,9 +24,11 @@ namespace nutr_grabber
     [Activity(Label = "nutr_grabber", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-                string str1;
+        string str1;
+      
         
-                // Android needs a databse to be copied from assets to a useable location
+        
+                // Android needs a database to be copied from assets to a useable location in inernal memory
         public void copyDataBase()
         {
             var dbPath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "USDADataProto.db");
@@ -48,27 +52,34 @@ namespace nutr_grabber
                 dbAssetStream.Close();
             }
         }
+        // gets item from spinner
+        private void unitSpin_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            Spinner spinner = (Spinner)sender;
 
+            string toast = string.Format("{0}", spinner.GetItemAtPosition(e.Position));
+            
+        }
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            
+
             //create the database copy
             copyDataBase();
-            
 
-            // Set our view from the "main" layout resource
+
+            // Set view from the main layout resource
             SetContentView(Resource.Layout.Main);
 
 
             //set widgets
             TextView message = FindViewById<TextView>(Resource.Id.textAmount);
             EditText amount = FindViewById<EditText>(Resource.Id.enterAmount);
+            TextView message3 = FindViewById<TextView>(Resource.Id.textUnit);
             Spinner unitSpin = FindViewById<Spinner>(Resource.Id.unitSpinner);
             TextView message2 = FindViewById<TextView>(Resource.Id.textIngred);
             AutoCompleteTextView autoIngred = FindViewById<AutoCompleteTextView>(Resource.Id.autoCompIngred);
-           
             Button search = FindViewById<Button>(Resource.Id.search);
 
             //open sqlite connection, create table
@@ -76,28 +87,52 @@ namespace nutr_grabber
             var db = new SQLiteConnection(Path);
             db.CreateTable<USDADataProto>();
 
-            
+            // creates a spinner that gets populated with items from my resource
+             var adapter = ArrayAdapter.CreateFromResource(
+                    this, Resource.Array.units_array, Android.Resource.Layout.SimpleSpinnerItem);
+            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            unitSpin.Adapter = adapter;
+
+            //************ will get the selected unit from spinner. will use shortly, but not yet
+            unitSpin.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(unitSpin_ItemSelected);
+
+            //this chunk of code is used to create the actual auto-complete text.
+            //I create a new, blank array. Then select the entire table I created earlier.
+            //Then, for every row of info, add only the Shrt_Desc (the name of the ingredient)
+            // to the blank array. 
+            ArrayList autoIngs = new ArrayList();
+            var addToAuto = db.Table<USDADataProto>();
+             foreach (var auto in addToAuto)
+             {
+                autoIngs.Add(auto.Shrt_Desc);
+             }
+             //When the text in the text-box changes, populate the auto-complete suggestions 
+             // with the name of the ingredients from the array.
+            autoIngred.TextChanged += delegate
+            {
+                ArrayAdapter autoCompAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleDropDownItem1Line, autoIngs);
+                autoIngred.Adapter = autoCompAdapter;
+            };
+
             //when you click the search button
-                search.Click += (object sender, EventArgs e) =>
+            search.Click += (object sender, EventArgs e) =>
                     {
-                        //formats input text
+                        //formats input text to use correctly
                         str1 = autoIngred.Text;
                         str1 = str1.TrimEnd();
                         str1 = str1.ToUpper();
-                        
+
 
                         // make list from a query in the USDADataProto table. Selects everything in the row where shrt_desc is equal to str1
                         List<USDADataProto> query = db.Query<USDADataProto>("SELECT * FROM USDADataProto WHERE Shrt_Desc = ?", str1);
 
-                       
+
                         // sets the intent to pass the info to listdisplay activity
                         var second = new Intent(this, typeof(ListDisplay));
 
-
-                     
                         foreach (var item in query)
                         {
-                                                              
+                            // passes items to second activity, then launches the new activity
                             second.PutExtra("name", Convert.ToString(item.Shrt_Desc));
                             second.PutExtra("Kcal", Convert.ToString(item.Energ_Kcal));
                             second.PutExtra("protein", Convert.ToString(item.Protein_g));
@@ -106,14 +141,14 @@ namespace nutr_grabber
                             second.PutExtra("sodium", Convert.ToString(item.Sodium_mg));
                             second.PutExtra("sugar", Convert.ToString(item.Sugar_Tot_g));
                             second.PutExtra("num", Convert.ToString(item.num));
-                            second.PutExtra("unit", item.unit);                 
+                            second.PutExtra("unit", item.unit);
                             StartActivity(second);
-                            
+
                         }
                     };
         }
-
-
+            
+    
 
 //----------------------------------------------------------------------------
        
