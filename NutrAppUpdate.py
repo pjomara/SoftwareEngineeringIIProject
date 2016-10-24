@@ -132,6 +132,7 @@ def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodiu
     tspInCup= 48.0
     tbspInCup= 16.0
     tspInTbsp= 3.0
+    flozInTsp= 6.0
     cupInOunce= 8.0
     
     ing_list= [float(calories), float(protein), float(fat), float(carbohydrates)\
@@ -160,6 +161,17 @@ def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodiu
             i = (((i* tbspInCup)/(convert_wt/convert_num))* amount) * 100
             i = i / float(servSize)
             converted_ing.append(round(i, 2))
+        return converted_ing
+    
+    if unit == "tsp" and convert_unit == "oz":
+        
+        convert_wt = (convert_wt/convert_num) * (amount / flozInTsp)
+        convert_val = convert_wt / 100
+
+        for i in ing_list:
+            i = i * convert_val
+            i = i / float(servSize)
+            converted_ing.append(round(i,2))
         return converted_ing
 
     if unit == "tsp" and convert_unit == "cup":
