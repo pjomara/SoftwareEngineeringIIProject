@@ -24,3 +24,55 @@ Fat:  1.14  gm
 Carbohydrates:  49.68  gm
 Sodium:  0.0  mg
 Sugar:  0.21  gm
+test1
+Service size:  2
+2   cup   WHOLE WHEAT FLOUR
+test2
+Service size:  2
+1   cup   WHOLE WHEAT FLOUR
+0.5   tsp   SALT
+1   tbsp   OLIVE OIL
+Nutritional information
+calories:  307.0
+Protein:  8.21  gm
+Fat:  7.89  gm
+Carbohydrates:  49.68  gm
+Sodium:  0.58  mg
+Sugar:  0.21  gm
+test3
+Service size:  1
+test4
+Service size:  2
+2   cup   WHOLE WHEAT FLOUR
+1   tsp   SALT
+1   tbsp   OLIVE OIL
+Nutritional information
+calories:  554.0
+Protein:  16.41  gm
+Fat:  9.02  gm
+Carbohydrates:  99.37  gm
+Sodium:  1.17  mg
+Sugar:  0.42  gm
+test1
+Service size:  2
+2   cup   WHOLE WHEAT FLOUR
+0.5   tsp   SALT
+1   tbsp   OLIVE OIL
+2   cup   BUTTER MILK
+Nutritional information
+calories:  652.0
+Protein:  24.52  gm
+Fat:  11.18  gm
+Carbohydrates:  111.11  gm
+Sodium:  1.05  mg
+Sugar:  12.16  gm
+t
+Service size:  1
+1   cup   WHOLE WHEAT FLOUR
+Nutritional information
+calories:  495.0
+Protein:  16.41  gm
+Fat:  2.27  gm
+Carbohydrates:  99.37  gm
+Sodium:  0.0  mg
+Sugar:  0.42  gm

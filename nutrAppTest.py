@@ -50,10 +50,9 @@ def main():
     nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar)
     num_ingr = len(recipe)-1
     recipe.append(num_ingr)
-    print (recipe)
 
 def nutr_grabber(ingredient):
-    conn= sqlite3.connect('USDADataProto.db')
+    conn= sqlite3.connect('USDAData.db')
     try:
         c = conn.cursor()
         try:
