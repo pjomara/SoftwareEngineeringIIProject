@@ -36,7 +36,7 @@ def main():
                                     carbohydrates, sodium, sugar, convert_wt,\
                                     convert_num, convert_unit)
             recipe_id= id_grabber(title)
-            ingredient_write_dbase(recipe_id, amount, unit, converted_ingr)
+            ingredient_write_dbase(recipe_id, amount, unit, ingredient, converted_ingr)
             ingredients = [amount, unit, ingredient, converted_ingr]            
             recipe.append(ingredients)
             recipe_write(amount, unit, description)
@@ -327,14 +327,14 @@ def id_grabber(title):
 
 #Writes ingredients to ingredients.sqlite.  Also adds recipe_id so ingredients can
 #be retrieved.
-def ingredient_write_dbase(recipe_id, amount, unit, converted_ingr):
+def ingredient_write_dbase(recipe_id, amount, unit, ingredient, converted_ingr):
     calories, protein, fat, carbohydrates, sodium, sugar= converted_ingr
     conn= sqlite3.connect("ingredients.sqlite")
     try:
         c=conn.cursor()
         try:
-            c.execute("INSERT INTO ingredient (recipe_id, amount, unit, calories, protein, fat, carbohydrates, sodium, sugar)\
-                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (recipe_id, amount, unit, calories, protein, fat, carbohydrates, sodium, sugar,))
+            c.execute("INSERT INTO ingredient (recipe_id, amount, unit, ingredient, calories, protein, fat, carbohydrates, sodium, sugar)\
+                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (recipe_id, amount, unit, ingredient, calories, protein, fat, carbohydrates, sodium, sugar,))
             conn.commit()
         finally:
             c.close()
