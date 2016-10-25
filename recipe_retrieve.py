@@ -29,8 +29,17 @@ def id_grabber(recipe):
 
     return recipe_id
 
-def get_ingredients():
-    pass
+def get_ingredients(recipe_id):
+    conn= sqlite3.connect("ingredients.sqlite")
+    try:
+        c= conn.cursor()
+        try:
+            c.execute("Select * from ingredient where recipe_id = ?", (recipe_id,))
+            #research this, probably does not use fetchone()
+            row = c.fetchone()
+            if row:
+                
+
 
 def compile_recipe():
     pass
