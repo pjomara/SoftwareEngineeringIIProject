@@ -51,6 +51,7 @@ def main():
     num_ingr = len(recipe)-1
     recipe.append(num_ingr)
 
+'''Submits the ingredient name and returns the nutritional information.'''
 def nutr_grabber(ingredient):
     conn= sqlite3.connect('USDAData.db')
     try:
@@ -105,8 +106,6 @@ def recipe_write(amount, unit, description):
     recipe.close()
 
 #prints nutritional information to recipe_book.txt
-#as of 9/13/2016- prints per 100g for each ingredient.- This needs to be fixed
-    #fixed 9/29
 def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar):
     recipe= open("recipe_book.txt", "a")
     print ("Nutritional information", file=recipe)
