@@ -24,7 +24,6 @@ def main():
     tot_sodium= float(0)
     tot_sugar= float(0)
     sat_fat= float(0)
-    trans_fat= float(0)
     tot_chol= float(0)
     
     while more == 'yes':
@@ -34,11 +33,11 @@ def main():
         if ingredient:
             ingredients =[]
             description, calories, protein, fat, carbohydrates, sodium,\
-                sugar, convert_wt, convert_num, satfat, transfat, cholesterol, convert_unit=\
+                sugar, satfat, cholesterol, convert_wt, convert_num, convert_unit=\
                 nutr_grabber(ingredient)
             converted_ingr= convert(amount, servSize, unit, calories, protein, fat,\
-                                    carbohydrates, sodium, sugar, convert_wt, \
-                                    convert_num, convert_unit, satfat, transfat, cholesterol)
+                                    carbohydrates, sodium, sugar, satfat, cholesterol,\
+                                    convert_wt, convert_num, convert_unit, )
             recipe_id= id_grabber(title)
             ingredient_write_dbase(recipe_id, amount, unit, ingredient, converted_ingr)
             ingredients = [amount, unit, ingredient, converted_ingr]            
@@ -51,11 +50,10 @@ def main():
             tot_sodium= tot_sodium + converted_ingr[4]/1000
             tot_sugar= tot_sugar + converted_ingr[5]
             sat_fat= sat_fat + converted_ingr[6]
-            trans_fat= trans_fat + converted_ingr[7]
-            tot_chol= tot_chol + converted_ing[8]/1000
+            tot_chol= tot_chol + converted_ing[7]/1000
             
             more = input("More ingredients? (Enter 'yes' or 'no'):")
-    nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, sat_fat, trans_fat, tot_chol)
+    nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, sat_fat, tot_chol)
     num_ingr = len(recipe)-1
     recipe.append(num_ingr)
 
@@ -65,7 +63,7 @@ def nutr_grabber(ingredient):
     try:
         c = conn.cursor()
         try:
-            c.execute("select Shrt_Desc, Energ_Kcal, Protein_g, Lipid_Tot_g, Carbohydrt_g, Fiber_TD_g, Sugar_Tot_g, Calcium_mg, Iron_mg, Magnesium_mg, Sodium_mg, Gm_unit, num, unit from USDADataProto where Shrt_Desc like ?", ('%'+ingredient+'%',))
+            c.execute("select Shrt_Desc, Energ_Kcal, Protein_g, Lipid_Tot_g, Carbohydrt_g, Fiber_TD_g, Sugar_Tot_g, FA_Sat_g, Cholestrl_mg, Calcium_mg, Iron_mg, Magnesium_mg, Sodium_mg, Gm_unit, num, unit from USDADataProto where Shrt_Desc like ?", ('%'+ingredient+'%',))
 
             row= c.fetchone()
             if row:
@@ -76,6 +74,8 @@ def nutr_grabber(ingredient):
                 carbohydrates= row[4]
                 sodium= row[10]
                 sugar= row[6]
+                satfat= row[]
+                cholesterol= row[]
                 convert_wt= row[11]
                 convert_num= row[12]
                 convert_unit= row[13]
@@ -88,6 +88,8 @@ def nutr_grabber(ingredient):
                 carbohydrates= None
                 sodium= None
                 sugar= None
+                satfat= None
+                cholesterol = None
                 convert_wt= None
                 convert_num= None
                 convert_unit= None
@@ -98,7 +100,7 @@ def nutr_grabber(ingredient):
     finally:
         conn.close()
 
-    return description, calories, protein, fat, carbohydrates, sodium, sugar, convert_wt, convert_num, convert_unit
+    return description, calories, protein, fat, carbohydrates, sodium, sugar, satfat, cholesterol, convert_wt, convert_num, convert_unit
 
 #prints title of recipe to recipe_book.txt
 def title_write(title, servSize):
@@ -114,7 +116,7 @@ def recipe_write(amount, unit, description):
     recipe.close()
 
 #prints nutritional information to recipe_book.txt
-def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar):
+def nutr_write(serving_size, tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, sat_fat, tot_chol):
     
     #Code referenced from http://stackoverflow.com/questions/8924173/how-do-i-print-bold-text-in-python
     class line:
@@ -140,16 +142,16 @@ def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sug
     print "Serving Size ", int(serv_size), "g", file=recipe
     print line.UNDERLINE + "_______________________________" + line.END, file=recipe
     print line.UNDERLINE + "Amount Per Serving             " + line.END, file=recipe
-    print line.UNDERLINE + "Calories ", int(cal), "                 " + line.END, file=recipe
+    print line.UNDERLINE + "Calories ", int(tot_calories), "                 " + line.END, file=recipe
     print line.UNDERLINE + "                 % Daily Value*" + line.END, file=recipe
-    print line.UNDERLINE + "Total Fat ", int(fat), "g           ", int(ft_dv),"%" + line.END, file=recipe
+    print line.UNDERLINE + "Total Fat ", int(tot_fat), "g           ", int(ft_dv),"%" + line.END, file=recipe
     #print line.UNDERLINE + "   Saturated Fat ", int(sat), "g          " + line.END, file=recipe
     #print line.UNDERLINE + "   Trans Fat ", int(tran), "g              " + line.END, file=recipe
     #print line.UNDERLINE + "Cholesterol ", int(chol), "mg       ", int(chol_dv), "%" + line.END, file=recipe
-    print line.UNDERLINE + "Sodium ", int(sod), "mg             ", int(sod_dv), "%" + line.END, file=recipe
-    print line.UNDERLINE + "Total Carbohydrate ", int(carb), "g   ", int(carb_dv), "%" + line.END, file=recipe
+    print line.UNDERLINE + "Sodium ", int(tot_sod), "mg             ", int(sod_dv), "%" + line.END, file=recipe
+    print line.UNDERLINE + "Total Carbohydrate ", int(tot_carb), "g   ", int(carb_dv), "%" + line.END, file=recipe
     #print line.UNDERLINE + "   Sugars ", int(sug), "g                " + line.END, file=recipe
-    print line.UNDERLINE + "Protein ", int(prot), "g               ", int(prot_dv), "%" + line.END, file=recipe
+    print line.UNDERLINE + "Protein ", int(tot_prot), "g               ", int(prot_dv), "%" + line.END, file=recipe
     print line.UNDERLINE + "_______________________________" + line.END, file=recipe
     print "*Percent Daily Values are based", file=recipe
     print line.UNDERLINE + " on a 2,000 calorie diet.      " + line.END, file=recipe
@@ -163,7 +165,7 @@ information for 2 sups flour.  If needed, units (cup, tsp, tbsp) are converted i
 whatever is the most common unit for that ingredient.  For example, a recipe gives
 the flour amount in tbsp, this will be converted into cups (the most commonly
 used unit to measure flour).'''
-def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodium, sugar\
+def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodium, sugar, satfat, cholesterol\
             , convert_wt, convert_num, convert_unit):
     #Convert factors
     tspInCup= 48.0
@@ -174,7 +176,7 @@ def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodiu
     ozInLb= 16.0
     
     ing_list= [float(calories), float(protein), float(fat), float(carbohydrates)\
-               , float(sodium), float(sugar)]
+               , float(sodium), float(sugar), float(satfat), float(cholesterol) ]
     
     convert_val= float
     convert_wt= float(convert_wt)
@@ -366,13 +368,13 @@ def id_grabber(title):
 #Writes ingredients to ingredients.sqlite.  Also adds recipe_id so ingredients can
 #be retrieved.
 def ingredient_write_dbase(recipe_id, amount, unit, ingredient, converted_ingr):
-    calories, protein, fat, carbohydrates, sodium, sugar= converted_ingr
+    calories, protein, fat, carbohydrates, sodium, sugar, satfat, cholesterol= converted_ingr
     conn= sqlite3.connect("ingredients.sqlite")
     try:
         c=conn.cursor()
         try:
-            c.execute("INSERT INTO ingredient (recipe_id, amount, unit, ingredient, calories, protein, fat, carbohydrates, sodium, sugar)\
-                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (recipe_id, amount, unit, ingredient, calories, protein, fat, carbohydrates, sodium, sugar,))
+            c.execute("INSERT INTO ingredient (recipe_id, amount, unit, ingredient, calories, protein, fat, carbohydrates, sodium, sugar, satfat, cholesterol)\
+                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (recipe_id, amount, unit, ingredient, calories, protein, fat, carbohydrates, sodium, sugar, satfat, cholesterol))
             conn.commit()
         finally:
             c.close()
