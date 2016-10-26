@@ -23,11 +23,11 @@ tot_sod_dv =2400.0
 tot_carb_dv =300.0
 tot_prot_dv =50.0
 
-ft_dv= (fat/tot_ft_dv)*100
-chol_dv= (chol/tot_chol_dv)*100
-sod_dv= (sod/tot_sod_dv)*100
-carb_dv= (carb/tot_carb_dv)*100
-prot_dv= (prot/tot_prot_dv)*100
+ft_dv= (tot_fat/tot_ft_dv)*100
+chol_dv= (tot_chol/tot_chol_dv)*100
+sod_dv= (tot_sod/tot_sod_dv)*100
+carb_dv= (tot_carb/tot_carb_dv)*100
+prot_dv= (tot_prot/tot_prot_dv)*100
 
 print "\n"
 print "\n"
