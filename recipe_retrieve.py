@@ -9,7 +9,9 @@ def main():
     recipe= input("What recipe would you like?- ")
     recipe_id, title, servSize= id_grabber(recipe)
     ingredients= get_ingredients(recipe_id)
+    print(ingredients)
     print_recipe(title, servSize, ingredients)
+    print_nutrition(ingredients)
     
     
 def id_grabber(recipe):
@@ -41,10 +43,6 @@ def get_ingredients(recipe_id):
         try:
             c.execute("Select * from ingredient where recipe_id = ?", (recipe_id,))
             ingredients = c.fetchall()
-            if ingredients:
-                ingredients.append(len(ingredients))
-            else:
-                ingredients= None
         finally:
             c.close()
 
@@ -62,7 +60,7 @@ def print_recipe(title, servSize, ingredients):
     
 def print_ingredients(ingredients):
     for i in ingredients:
-        print (str(i[1]), " ",i[2]," ",i[3])
+        print (i[1], " ",i[2]," ",i[3])
 
 def print_nutrition(ingredients):
     calories= 0
@@ -72,7 +70,7 @@ def print_nutrition(ingredients):
     sodium= 0
     sugar= 0
     for i in ingredients:
-        calories= calories + (i[4])
+        calories= calories + int((i[4]))
 
     print("Calories: ", calories)
 
