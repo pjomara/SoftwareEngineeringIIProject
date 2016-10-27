@@ -12,7 +12,7 @@ def main():
     recipe =[]
     title= input("Enter the recipe title: ")
     servSize= eval(input("Enter the serving size: "))
-    recipe_write_dbase(title)
+    recipe_write_dbase(title, servSize)
     recipe.append(title)
     recipe.append(servSize)
     title_write(title, servSize)
@@ -289,12 +289,12 @@ def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodiu
 recipe.sqlite and ingredients.sqlite.'''
 
 #adds recipe title and generates recipe_id.
-def recipe_write_dbase(title):
+def recipe_write_dbase(title, servSize):
     conn= sqlite3.connect("recipe.sqlite")
     try:
         c= conn.cursor()
         try:
-            c.execute("INSERT INTO recipe (recipe_title) VALUES (?)", (title,))
+            c.execute("INSERT INTO recipe (recipe_title, servSize) VALUES (?, ?)", (title, servSize,))
             conn.commit()
 
         finally:

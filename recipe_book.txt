@@ -76,3 +76,42 @@ Fat:  2.27  gm
 Carbohydrates:  99.37  gm
 Sodium:  0.0  mg
 Sugar:  0.42  gm
+test1
+Service size:  1
+biscuit_test
+Service size:  1
+biscuitTest
+Service size:  1
+2   cup   WHOLE WHEAT FLOUR
+Nutritional information
+calories:  989.0
+Protein:  32.83  gm
+Fat:  4.55  gm
+Carbohydrates:  198.73  gm
+Sodium:  0.01  mg
+Sugar:  0.85  gm
+biscuits
+Service size:  2
+2   cup   WHOLE WHEAT FLOUR
+2   tsp   BAKING POWDER
+1   tsp   SUGAR
+0.75   tsp   SALT
+0.5   cup   VEGETABLE SHORTENING
+1   cup   BUTTER MILK
+Nutritional information
+calories:  1004.0
+Protein:  20.46  gm
+Fat:  54.53  gm
+Carbohydrates:  107.91  gm
+Sodium:  1.6  mg
+Sugar:  7.69  gm
+test2
+Service size:  5
+2   cup   OLIVE OIL
+Nutritional information
+calories:  764.0
+Protein:  0.0  gm
+Fat:  86.4  gm
+Carbohydrates:  0.0  gm
+Sodium:  0.0  mg
+Sugar:  0.0  gm
