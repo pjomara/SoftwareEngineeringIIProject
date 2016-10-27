@@ -62,6 +62,18 @@ def print_recipe(title, servSize, ingredients):
     
 def print_ingredients(ingredients):
     for i in ingredients:
-        print(i[1], " ",i[2]," ",i[3])
+        print (str(i[1]), " ",i[2]," ",i[3])
+
+def print_nutrition(ingredients):
+    calories= 0
+    protein= 0
+    fat= 0
+    carbohydrates= 0
+    sodium= 0
+    sugar= 0
+    for i in ingredients:
+        calories= calories + (i[4])
+
+    print("Calories: ", calories)
 
 main()
