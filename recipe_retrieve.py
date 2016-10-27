@@ -70,8 +70,18 @@ def print_nutrition(ingredients):
     sodium= 0
     sugar= 0
     for i in ingredients:
-        calories= calories + int((i[4]))
-
-    print("Calories: ", calories)
+        calories= calories + i[4]
+        protein= protein + i[5]
+        fat= fat + i[6]
+        carbohydrates= carbohydrates + i[7]
+        sodium = sodium + i[8]
+        sugar= sugar + i[9]
+    print ("\nNutritional information")
+    print("Calories: ", calories, " gm")
+    print("Protein: ", protein, " gm")
+    print("Fat: ", fat, " gm")
+    print("Carbohydrates: ", carbohydrates, " gm")
+    print("Sodium: ", sodium, " mg")
+    print("Sugar: ", sugar, " gm")
 
 main()
