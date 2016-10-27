@@ -22,28 +22,48 @@
             he needs for each ingredient. He can click the menu, drop down to the option he wants and click it rather than typing it it.
             He thinks it is also helpful because he often has trouble typing things correctly. ( USER STORY )
 
-10/3 - 10/16
+10/3/2016 - 10/16/2016
             Create a GUI to display to the customer
+                -We want a GUI for our customer so that they can easily run through our program without having to type out each ingredient
+                 and amount for an entire recipe.
             Create conversions for Ounces
+                -We want to broaden the horizons of our program to be able to convert fluid ounces and weight ounces so that our program
+                 can operate with a wider variety of recipes and give more precision
             Design and develop a strategy to display a serving size
+                -We want to display serving size because there is the possibility that a user might not be eating the whole recipe. By 
+                 splitting up a recipe into serving sizes, a user can more closely follow a diet or meal plan and avoid having to do the
+                 calculations themselves.
 
-10/16/2016 -John is a single Dad who gets to see his son on weekends. He knows his son loves his home made Mac 'n Cheese but he likes to
+10/17/2016 -John is a single Dad who gets to see his son on weekends. He knows his son loves his home made Mac 'n Cheese but he likes to
             watch what he eats. He likes how the program works but his son is used to the nutrition labels found on boxes. His son would
             prefer to print his very own nutritional label that looks just like the ones at the store. By changing the way our program 
             prints, John's son can print out his nutrition label and show it to his friends. ( USER STORY )
             
-10/16/2016 -Sara works two jobs and has to prep all of her meals in advance. She is a diabetic and has to watch her carbohydrate intake.
+10/17/2016 -Sara works two jobs and has to prep all of her meals in advance. She is a diabetic and has to watch her carbohydrate intake.
             She likes using our application because it currently shows her how many carbs are in each ingredient. With an addition to our
             interface, she will be able to see the total carbs in a complete dish that she creates. Instead of her having to go through
             and count the carbs by each ingredient, she will be able to view the nutrition information for her entire recipe. The 
             nutrition information helps her make sure she counts her carbohydrates correctly and save time. ( USER STORY )
             
-10/16/2016 -Raymond is a retired chef who enjoys cooking for his family. He has all of his favorite recipes saved in a file cabinet in
+10/17/2016 -Raymond is a retired chef who enjoys cooking for his family. He has all of his favorite recipes saved in a file cabinet in
             his house. Every time he wants to make a dish, he searched through his files and finds the recipe hes looking for to cook.
             Our app helps him by showing him not only the nutrition information, but also allowing him to save recipes so he can more
             easily access them. ( USER STORY )
             
-10/16/2016 
+10/17/2016-10/30/2016 
             Print out in nutrition label format
+                -Printing out in the format of a nutrition label will give a more professional look to our output file. Also, children
+                 may want to have a nutrition label that looks like the one on their favorite boxes of food. It is the best way to display
+                 our information and is widely recognized. Familiar is best.
             Add more to the interface
+                -Currently our interface has the user type in to search for an ingredient and it will return the ingredient's nutritional
+                 information. We are working on adding a way to create a recipe so that the user can get the nutritional information for
+                 a recipe, instead of an ingredient. The issue with this is that we have a program that does this already, but to get it
+                 to work in the interface, Steven has to convert our python code into C and add interface components. The end goal is to
+                 have drop down menus where the user can select their ingredients and submit to receive their nutrition label containing
+                 all of the nutrition information.
             Save recipes to a database
+                -By saving recipes to a database, a user will eventually have the option to recall saved recipes and possibly even be able
+                 to share their recipes. As of now, they will have the print file from our program, but if they accidentally delete that 
+                 file, then they would have to recreate the recipe by putting all of the ingredients back in.
+                
