@@ -32,3 +32,10 @@ The next sprint (ending 10/29) includes continued development of the user interf
 Progress report for week ending 10/22
 
 We did not complete many tasks this past week but we made progress on each item in the bi-weekly sprint.  We are working on the coding to make the nutritional labels fit a more standard format.  We continue to work on the user interface and we have a working prototype of the recipe-saving functionality.  Two items completed but not included in the sprint are converters for ounces and a "serving size" feature.  The serving size features asks the user for serving size when they create a new recipe.  All the nutritional values are then divided by the serving size.
+
+Progress report for week ending 10/29
+Further progress was made regarding the user interface.  The user interface, an Android App, can now accept an ingredient, generate a list of items containing the ingredient, and return the nutritional informationm for that ingredient.
+
+The coding to format the nutritional information is nearly complete and needs to be added to the main app (nutrApp.py).
+
+I created a separate app, recipe_retrieve.py, that allows a user to recall a recipe and print to the screen.  Several functions have been added to nutrapp.py that write the recipe title and ingredients/ nutritional information to recipe.sqlite and ingredients.sqlite respectively.  In recipe.sqlite, a unique identifier is added to the recipe title.  Each ingredient, with the converted nutritional informaion and the unique recipe ID is written to ingredients.sqlite.  Using the ID number, the recipe title, serving size, ingredients, and nutritional information can be pulled and printed to the screen.
