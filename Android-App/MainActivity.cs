@@ -1,5 +1,4 @@
-//starting to implement unit calculations. Currently only have if the database unit is the same as the entered unit, and cup to tbsp.
-// Also fixed the spinner_itmselected so it returns the correct unit and is now usable.
+// The conversions are added so that the correct value for the amount of an ingredient is correct
 
 
 using System;
@@ -29,8 +28,8 @@ namespace nutr_grabber
         double tspInCup = 48.0;
         double tbspInCup = 16.0;
         double tspInTbsp = 3.0;
-        double flozInCup = 8.0;
-        double flozInTbsp = 0.5;
+        double ozInCup = 8.0;
+        double ozInTbsp = 0.5;
         double ozInLb = 16.0;
 
         string name;
@@ -115,7 +114,7 @@ namespace nutr_grabber
             
 
 
-            //this chunk of code is used to create the actual auto-text.
+            //this is used to create the actual auto-text.
             //I create a new, blank array. Then select the entire table I created earlier.
             //Then, for every row of info add only the Shrt_Desc (the name of the ingredient)
             // to the blank array. 
@@ -163,50 +162,159 @@ namespace nutr_grabber
                             num = i.num;
                             unit = i.unit;
                         }
-
+                      
+                        cal = cal/num;
+                        protein = protein/num;
+                        fat = fat / num; 
+                        carbs = carbs / num;
+                        sodium = sodium / num; 
+                        sugar = sugar / num;
 
                         if (unit == unitEntered)
-                            {
-                                cal = cal * amountEntered;
-                                protein = protein * amountEntered;
-                                fat = fat * amountEntered;
-                                carbs = carbs * amountEntered;
-                                sodium = sodium * amountEntered;
-                                sugar = sugar * amountEntered;
-                            }
-                            else if(unit == "cup" && unitEntered == "tbsp")
-                            {
-                                cal = (cal / tbspInCup) * amountEntered;
-                                protein = (protein / tbspInCup) * amountEntered;
-                                fat = (fat / tbspInCup) * amountEntered;
-                                carbs = (carbs / tbspInCup) * amountEntered;
-                                sodium = (sodium / tbspInCup) * amountEntered;
-                                sugar = (sugar / tbspInCup) * amountEntered;
-                            }
+                        {
+                            cal = cal * amountEntered;
+                            protein = protein * amountEntered;
+                            fat = fat * amountEntered;
+                            carbs = carbs * amountEntered;
+                            sodium = sodium * amountEntered;
+                            sugar = sugar * amountEntered;
+                        }
+                        else if (unit == "cup" && unitEntered == "tbsp")
+                        {
+                            cal = (cal / tbspInCup) * amountEntered;
+                            protein = (protein / tbspInCup) * amountEntered;
+                            fat = (fat / tbspInCup) * amountEntered;
+                            carbs = (carbs / tbspInCup) * amountEntered;
+                            sodium = (sodium / tbspInCup) * amountEntered;
+                            sugar = (sugar / tbspInCup) * amountEntered;
+                        }
+                        else if (unit == "cup" && unitEntered == "tsp")
+                        {
+                            cal = (cal / tspInCup) * amountEntered;
+                            protein = (protein / tspInCup) * amountEntered;
+                            fat = (fat / tspInCup) * amountEntered;
+                            carbs = (carbs / tspInCup) * amountEntered;
+                            sodium = (sodium / tspInCup) * amountEntered;
+                            sugar = (sugar / tspInCup) * amountEntered;
+                        }
+                        else if (unit == "tsp" && unitEntered == "cup")
+                        {
+                            cal = (cal * tspInCup) * amountEntered;
+                            protein = (protein * tspInCup) * amountEntered;
+                            fat = (fat * tspInCup) * amountEntered;
+                            carbs = (carbs * tspInCup) * amountEntered;
+                            sodium = (sodium * tspInCup) * amountEntered;
+                            sugar = (sugar * tspInCup) * amountEntered;
+                        }
+                        else if (unit == "tsp" && unitEntered == "tbsp")
+                        {
+                            cal = (cal * tspInTbsp) * amountEntered;
+                            protein = (protein * tspInTbsp) * amountEntered;
+                            fat = (fat * tspInTbsp) * amountEntered;
+                            carbs = (carbs * tspInTbsp) * amountEntered;
+                            sodium = (sodium * tspInTbsp) * amountEntered;
+                            sugar = (sugar * tspInTbsp) * amountEntered;
+                        }
+                        else if (unit == "tbsp" && unitEntered == "cup")
+                        {
+                            cal = (cal * tbspInCup) * amountEntered;
+                            protein = (protein * tbspInCup) * amountEntered;
+                            fat = (fat * tbspInCup) * amountEntered;
+                            carbs = (carbs * tbspInCup) * amountEntered;
+                            sodium = (sodium * tbspInCup) * amountEntered;
+                            sugar = (sugar * tbspInCup) * amountEntered;
+                        }
+                        else if (unit == "tbsp" && unitEntered == "tsp")
+                        {
+                            cal = (cal / tspInTbsp) * amountEntered;
+                            protein = (protein / tspInTbsp) * amountEntered;
+                            fat = (fat / tspInTbsp) * amountEntered;
+                            carbs = (carbs / tspInTbsp) * amountEntered;
+                            sodium = (sodium / tspInTbsp) * amountEntered;
+                            sugar = (sugar / tspInTbsp) * amountEntered;
+                        }
+                        else if (unit == "oz" && unitEntered == "tbsp")
+                        {
+                            cal = (cal / ozInTbsp) * amountEntered;
+                            protein = (protein / ozInTbsp) * amountEntered;
+                            fat = (fat / ozInTbsp) * amountEntered;
+                            carbs = (carbs / ozInTbsp) * amountEntered;
+                            sodium = (sodium / ozInTbsp) * amountEntered;
+                            sugar = (sugar / ozInTbsp) * amountEntered;
+                        }
+                        else if (unit == "oz" && unitEntered == "cup")
+                        {
+                            cal = (cal * ozInCup) * amountEntered;
+                            protein = (protein * ozInCup) * amountEntered;
+                            fat = (fat * ozInCup) * amountEntered;
+                            carbs = (carbs * ozInCup) * amountEntered;
+                            sodium = (sodium * ozInCup) * amountEntered;
+                            sugar = (sugar * ozInCup) * amountEntered;
+                        }
+                        else if (unit == "tbsp" && unitEntered == "oz")
+                        {
+                            cal = (cal * ozInTbsp) * amountEntered;
+                            protein = (protein * ozInTbsp) * amountEntered;
+                            fat = (fat * ozInTbsp) * amountEntered;
+                            carbs = (carbs * ozInTbsp) * amountEntered;
+                            sodium = (sodium * ozInTbsp) * amountEntered;
+                            sugar = (sugar * ozInTbsp) * amountEntered;
+                        }
+                        else if (unit == "cup" && unitEntered == "oz")
+                        {
+                            cal = (cal / ozInTbsp) * amountEntered;
+                            protein = (protein / ozInTbsp) * amountEntered;
+                            fat = (fat / ozInTbsp) * amountEntered;
+                            carbs = (carbs / ozInTbsp) * amountEntered;
+                            sodium = (sodium / ozInTbsp) * amountEntered;
+                            sugar = (sugar / ozInTbsp) * amountEntered;
+                        }
+                        else if (unit == "oz" && unitEntered == "lb")
+                        {
+                            cal = (cal * ozInLb) * amountEntered;
+                            protein = (protein * ozInLb) * amountEntered;
+                            fat = (fat * ozInLb) * amountEntered;
+                            carbs = (carbs * ozInLb) * amountEntered;
+                            sodium = (sodium * ozInLb) * amountEntered;
+                            sugar = (sugar * ozInLb) * amountEntered;
+                        }
+                        else if(unit == "lb" && unitEntered == "oz")
+                        {
+                            cal = (cal / ozInLb) * amountEntered;
+                            protein = (protein / ozInLb) * amountEntered;
+                            fat = (fat / ozInLb) * amountEntered;
+                            carbs = (carbs / ozInLb) * amountEntered;
+                            sodium = (sodium / ozInLb) * amountEntered;
+                            sugar = (sugar / ozInLb) * amountEntered;
+                        }
 
-                        
 
 
+
+                        // formats doubles to 2 decimal places
+                        cal = Math.Round(cal, 2);
+                        protein = Math.Round(protein, 2);
+                        fat = Math.Round(fat, 2);
+                        carbs = Math.Round(carbs, 2);
+                        sodium = Math.Round(sodium, 2);
+                        sugar = Math.Round(sugar, 2);
 
 
                         // sets the intent to pass the info to listdisplay activity
-                        var second = new Intent(this, typeof(ListDisplay));
+                        var second = new Intent(this, typeof(ListDisplay));                        
+                         // passes items to second activity, then launches the new activity
+                         second.PutExtra("name", Convert.ToString(name));
+                         second.PutExtra("Kcal", Convert.ToString(cal));
+                         second.PutExtra("protein", Convert.ToString(protein));
+                         second.PutExtra("fat", Convert.ToString(fat));
+                         second.PutExtra("carbs", Convert.ToString(carbs));
+                         second.PutExtra("sodium", Convert.ToString(sodium));
+                         second.PutExtra("sugar", Convert.ToString(sugar));
+                         second.PutExtra("num", Convert.ToString(amountEntered));
+                         second.PutExtra("unit", unitEntered);
+                         StartActivity(second);
 
-                        foreach (var item in query)
-                        {
-                            // passes items to second activity, then launches the new activity
-                            second.PutExtra("name", Convert.ToString(name));
-                            second.PutExtra("Kcal", Convert.ToString(cal));
-                            second.PutExtra("protein", Convert.ToString(protein));
-                            second.PutExtra("fat", Convert.ToString(fat));
-                            second.PutExtra("carbs", Convert.ToString(carbs));
-                            second.PutExtra("sodium", Convert.ToString(sodium));
-                            second.PutExtra("sugar", Convert.ToString(sugar));
-                            second.PutExtra("num", Convert.ToString(amountEntered));
-                            second.PutExtra("unit", unitEntered);
-                            StartActivity(second);
-
-                        }
+                        
                         
                     };
         }
@@ -274,3 +382,4 @@ namespace nutr_grabber
 
     }
 }
+
