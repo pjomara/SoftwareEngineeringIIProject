@@ -12,3 +12,11 @@ sprint ending 10/29
 - Add function to save recipes
 - Add nutritional information formatting
 - Conduct extensive testing on conversion functions
+
+sprint ending 11/11
+- Continue development of user interface
+- Continue converting Python code into C#
+- Add nutritional information formatting
+- Conduct extensive testing on conversion functions
+- Re-work converter() function
+
