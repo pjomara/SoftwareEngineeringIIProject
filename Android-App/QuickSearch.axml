@@ -5,6 +5,7 @@
 //Changed the background color of the text boxes to stand out for user-visibility.
 //Changed the size of the text-views to small instead of large (looks nicer and takes less space).
 //Changed some margins to look nicer.
+// name change for easy identification
 
 
 <?xml version="1.0" encoding="utf-8"?>
