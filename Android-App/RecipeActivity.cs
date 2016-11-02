@@ -1,6 +1,8 @@
 // This does basically the same as the quick search, except:
 // A total for all the nutrients is added.
 //The amount, unit, and name of ingredients are not currently passed, just the name of the recipe.
+// the submit button and recipe name are disabled until the user presses "done adding..". This is to prevent users from
+//accidentally pressing submit instead of "add ingredient" or such.
 
 
 using System;
