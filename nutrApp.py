@@ -44,7 +44,7 @@ def main():
             tot_protein = tot_protein + converted_ingr[1]
             tot_fat = tot_fat + converted_ingr[2]
             tot_carb = tot_carb + converted_ingr[3]
-            tot_sodium= tot_sodium + converted_ingr[4]/1000
+            tot_sodium= tot_sodium + converted_ingr[4]
             tot_sugar= tot_sugar + converted_ingr[5]
             more = input("More ingredients? (Enter 'yes' or 'no'):")
     nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar)
