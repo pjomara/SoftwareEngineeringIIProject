@@ -1,21 +1,20 @@
-Upon strating the app, the Home screen is launched, allowing the user to select a quick search or to make a recipe. (Quick search, as the name implies, is faster and for an ingredient or such.)
+Upon starting the app, the Home screen is launched, allowing the user to select a quick search or to make a recipe. (Quick search, as the name implies, is faster and for an ingredient or such.)
 
 Quick Search:
 This app searches the USDA food database for a user-entered ingredient and returns nutritional information about it.
 
 It uses a Spinner for the units so the user can not enter anything except a usable unit.
 
-It also uses an auto-complete text-bar to help users find the correct ingredient, as well as helping not enter the wrong format 
-and help with spelling errors.
+It also uses an auto-complete text-bar to help users find the correct ingredient, as well as helping not enter the wrong format and help with spelling errors.
 
 It creates a copy of the database in the internal memory of the phone.
 
 When the search button is clicked, it queries the database and stores the nutritional info of the ingredient as a list.
 
-It then passes that info, one at a time, to a new Activity (what you see on the phone at any given time, i.e a new page) 
-where it then converts that info into a list view for easier viewing.
+It then passes that info, one at a time, to a new Activity (what you see on the phone at any given time, i.e a new page) where it then converts that info into a list view for easier viewing.
 
-Recipe: The same as quick search, except:
+Recipe: 
+The same as quick search, except:
 - Multiple ingredients are added on the spot.
 - A recipe name is added.
 - The total of the nutrients are passed instead of the individual values.
