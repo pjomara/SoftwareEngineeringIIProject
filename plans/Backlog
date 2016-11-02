@@ -67,3 +67,25 @@
                  to share their recipes. As of now, they will have the print file from our program, but if they accidentally delete that 
                  file, then they would have to recreate the recipe by putting all of the ingredients back in.
                 
+10/30/2016-11/13/2016
+            Continue working on printing out in Nutrition Label format
+                -The Nutrition Label code still has to be tested and updated to make sure that it prints out correctly and that it pulls
+                 the right data. We added cholesterol and saturated fat conversions, and have to make sure that the information returned
+                 from these values is correct.
+            Work on adding data structures to eliminate repetitive code
+                -We are looking to find a way to create a data structure that can execute the conversions needed for our values. By doing
+                 this we will shorten the length of our code and make it easier to follow. Currently we have repetitive code that does all
+                 of our conversions.
+            Add more to the interface
+                -We are still working on making the interface more user friendly. We are working on creating recipes and once the Nutrition
+                 Label code is complete, we will be able to print out the results from the interface (the user selecting through drop down
+                 menus) into a Nutrition Label that will be saved in a text file.
+            Add fail cases to prevent the program from crashing
+                -Currently if you type in an ingredient that isn't in the database, the program will just crash. If we have an option that
+                 can add the ingredient to the database, or even to just respond that the ingredient isn't in the database, our program will
+                 be more professional and user friendly. If we go the route where you can add to the database, it will have to search either
+                 another database, or the internet and import the results to the database.
+            Continue Testing
+                -We will continue to test our program for bugs and to make sure that our changes that we make don't throw off any of our 
+                 calculations. Testing will be important once we implement our data structures to make sure that it doesn't compromise any
+                 of our results. 

@@ -1,0 +1,19 @@
+// Provides the button on the homescreen
+// The home screen just consists of 2 buttons, one for a quick seach and one for a recipe search
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:text="Quick search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/quickSearchBtn" />
+    <Button
+        android:text="Make a Recipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recipeSearchBtn" />
+</LinearLayout>
