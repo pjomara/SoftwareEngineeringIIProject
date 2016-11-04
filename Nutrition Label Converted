@@ -1,0 +1,55 @@
+#!/usr/bin/env python 
+# -*- coding: latin-1 -*
+
+#Code referenced from http://stackoverflow.com/questions/8924173/how-do-i-print-bold-text-in-python
+
+class line:
+   BOLD = '\033[1m'
+   UNDERLINE = '\033[4m'
+   END = '\033[0m'
+
+serv_size= 13
+cal= 250
+fat= 10.0
+sat= 3.0
+tran= 7.0
+chol= 100.0
+sod=123.0
+carb=22.0
+sug=10.0
+prot=4.0
+tot_ft_dv =65.0
+tot_chol_dv =300.0
+tot_sod_dv =2400.0
+tot_carb_dv =300.0
+tot_prot_dv =50.0
+
+ft_dv= (fat/tot_ft_dv)*100
+chol_dv= (chol/tot_chol_dv)*100
+sod_dv= (sod/tot_sod_dv)*100
+carb_dv= (carb/tot_carb_dv)*100
+prot_dv= (prot/tot_prot_dv)*100
+
+print "\n"
+print "_______________________________"
+#print line.BOLD + "Nutrition Facts" + line.END
+print line.BOLD + "Valeur Nutritive" + line.END
+print "Portion ", int(serv_size), "g"
+print line.UNDERLINE + "_______________________________" + line.END
+#print "Amount Per Serving             "
+print line.UNDERLINE + "Quantité par portion           " + line.END
+print line.UNDERLINE + "Calories ", int(cal), "                 " + line.END
+#print "          % Daily Value*"
+print line.UNDERLINE + "          % Valeur quotidienne*" + line.END
+print line.UNDERLINE + "Total Fat ", int(fat), "g           ", int(ft_dv),"%" + line.END
+print line.UNDERLINE + "   Saturated Fat ", int(sat), "g          " + line.END
+print line.UNDERLINE + "   Trans Fat ", int(tran), "g              " + line.END
+print line.UNDERLINE + "Cholesterol ", int(chol), "mg       ", int(chol_dv), "%" + line.END
+print line.UNDERLINE + "Sodium ", int(sod), "mg             ", int(sod_dv), "%" + line.END
+print line.UNDERLINE + "Total Carbohydrate ", int(carb), "g   ", int(carb_dv), "%" + line.END
+print line.UNDERLINE + "   Sugars ", int(sug), "g                " + line.END
+print line.UNDERLINE + "Protein ", int(prot), "g               ", int(prot_dv), "%" + line.END
+print line.UNDERLINE + "_______________________________" + line.END
+print "*Percent Daily Values are based"
+print line.UNDERLINE + " on a 2,000 calorie diet.      " + line.END
+print "\n"
