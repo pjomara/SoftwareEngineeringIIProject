@@ -1,8 +1,4 @@
-//This is the layout for the recipe page. It is basically the same as the quick search, except this has:
-// **2 extra buttons: --one to let it know you are done adding ingredients which opens up the name and submit options
-//-------------------- one that submits the recipe, name and all, then loads the list activity
-//** an extra text field to enter a recipe name
-
+//This is the layout for the recipe page. It is basically the same as the quick search, except in french.
 
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -10,55 +6,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
   <TextView
-      android:text="Enter the Amount:"
-      android:textAppearance="?android:attr/textAppearanceSmall"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/textAmount" />
-  <EditText
-      android:layout_width="match_parent"
-      android:layout_height="30.0dp"
-      android:background="#4c4c4c"
-      android:id="@+id/enterAmount"
-      android:layout_marginBottom="9.0dp" />
-  <TextView
-      android:text="Enter the unit:"
-      android:textAppearance="?android:attr/textAppearanceSmall"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/textUnit" />
-  <Spinner
-      android:layout_width="match_parent"
-      android:layout_height="35.0dp"
-      android:id="@+id/unitSpinner"
-      android:layout_marginBottom="9.0dp"
-      android:background="#4c4c4c"
-      android:popupBackground="#4c4c4c"
-      android:tag="Unit" />
-  <TextView
-      android:text="Enter Ingredient:"
-      android:textAppearance="?android:attr/textAppearanceSmall"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/textIngred" />
-  <AutoCompleteTextView
-      android:layout_width="match_parent"
-      android:layout_height="30.0dp"
-      android:background="#4c4c4c"
-      android:id="@+id/autoCompIngred"
-      android:layout_marginBottom="9.0dp"/>
+        android:text="Inscrivez le montant:"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textAmount" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#4c4c4c"
+        android:id="@+id/enterAmount"
+        android:layout_marginBottom="9.0dp" />
+    <TextView
+        android:text="Entrer dans l'unité:"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textUnit" />
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="38.0dp"
+        android:id="@+id/unitSpinner"
+        android:layout_marginBottom="9.0dp"
+        android:background="#4c4c4c"
+        android:popupBackground="#4c4c4c"
+        android:tag="Unit" />
+    <TextView
+        android:text="Entrer l'ingrédient:"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textIngred" />
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#4c4c4c"
+        android:id="@+id/autoCompIngred"
+        android:layout_marginBottom="9.0dp"/>
   <Button
-      android:text="Add Ingredient to Recipe"
+      android:text="Ajouter ingrédient à la recette"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:id="@+id/addIngred" />
   <Button
-      android:text="Done Adding Ingredients"
+      android:text="Terminé Ajout d'ingrédients"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:id="@+id/finalize" />
   <TextView
-     android:text="Recipe Name:"
+     android:text="Nom de la recette:"
      android:textAppearance="?android:attr/textAppearanceSmall"
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
@@ -70,7 +66,7 @@
      android:id="@+id/enterName"
      android:layout_marginBottom="9.0dp" />
   <Button
-      android:text="Let's see it!"
+      android:text="Accéder à la recette"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:id="@+id/submit" />
