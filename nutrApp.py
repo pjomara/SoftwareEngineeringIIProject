@@ -1,34 +1,35 @@
-'''This is a command-line program that asks for ingredient amount, unit, and name.
-Compiles each ingredient in a .txt file named recipe_book.txt.
-Queries an ingredient database, pulls nutritional info. for each ingredient.
-Prints cumulative nutritional info. to recipe_book.txt.  This version also puts all
-ingredients into a list.  The list contains the recipe title, embedded list for each
-ingredient that contains nutritional information, and the number of ingredients in
-the recipe'''
+'''Il s'agit d'un programme en ligne de commande qui demande la quantité, l'unité et le nom de l'ingrédient.
+Compile chaque ingrédient dans un fichier .txt nommé recipe_book.txt.
+Interroge une base de données d'ingrédients, tire des informations nutritionnelles. Pour chaque ingrédient.
+Imprime des informations nutritionnelles cumulatives. À recipe_book.txt. Cette version met également
+Ingrédients dans une liste. La liste contient le titre de la recette, la liste
+Ingrédient contenant des informations nutritionnelles et le nombre d'ingrédients
+la recette'''
 
 import sqlite3
 
 def main():
     recipe =[]
-    title= input("Enter the recipe title: ")
-    servSize= eval(input("Enter the serving size: "))
+    title= input("Entrez le titre de la recette: ")
+    servSize= eval(input("Entrez la taille de la portion: "))
     recipe_write_dbase(title, servSize)
     recipe.append(title)
     recipe.append(servSize)
     title_write(title, servSize)
-    more= 'yes'
+    more= 'oui'
     tot_calories= float(0)
     tot_protein= float(0)
     tot_fat= float(0)
     tot_carb= float(0)
     tot_sodium= float(0)
     tot_sugar= float(0)
-    while more == 'yes':
-        amount = eval(input("Enter amount: "))
-        unit = input("Enter the unit(I.E.- cup, tsp); ")
-        ingredient = input("Enter the ingredient: ")
+    while more == 'oui':
+        amount = eval(input("Entrer le montant: "))
+        unit = input("Entrer dans l'unité(ex. - coupe, cuillère à café); ")
+        ingredient = input("Entrez l'ingrédient: ")
         if ingredient:
             ingredients =[]
+            ####
             description, calories, protein, fat, carbohydrates, sodium,\
                 sugar, convert_wt, convert_num, convert_unit=\
                 nutr_grabber(ingredient)
@@ -46,12 +47,12 @@ def main():
             tot_carb = tot_carb + converted_ingr[3]
             tot_sodium= tot_sodium + converted_ingr[4]
             tot_sugar= tot_sugar + converted_ingr[5]
-            more = input("More ingredients? (Enter 'yes' or 'no'):")
+            more = input("Plus d'ingrédients? (Entrer 'oui' or 'non'):")
     nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar)
     num_ingr = len(recipe)-1
     recipe.append(num_ingr)
 
-'''Submits the ingredient name and returns the nutritional information.'''
+'''Soumet le nom de l'ingrédient et renvoie l'information nutritionnelle.'''
 def nutr_grabber(ingredient):
     conn= sqlite3.connect('USDAData.db')
     try:
@@ -63,7 +64,7 @@ def nutr_grabber(ingredient):
             if row:
                 description = row[0]
                 calories= row[1]
-                protein= row[2]
+                protéine= row[2]
                 fat= row[3]
                 carbohydrates= row[4]
                 sodium= row[10]
@@ -75,7 +76,7 @@ def nutr_grabber(ingredient):
             else:
                 description = None
                 calories= None
-                protein= None
+                protéine= None
                 fat= None
                 carbohydrates= None
                 sodium= None
@@ -90,22 +91,22 @@ def nutr_grabber(ingredient):
     finally:
         conn.close()
 
-    return description, calories, protein, fat, carbohydrates, sodium, sugar, convert_wt, convert_num, convert_unit
+    return description, calories, protéine, fat, carbohydrates, sodium, sugar, convert_wt, convert_num, convert_unit
 
-#prints title of recipe to recipe_book.txt
+#Imprime le titre de la recette sur recipe_book.txt
 def title_write(title, servSize):
     recipe= open("recipe_book.txt", "a")
     print (title, file=recipe)
     print ("Serves: ", servSize, file=recipe)
     recipe.close()
 
-#prints amount, unit, and ingredient to recipe_book.txt
+#Imprime le montant, l'unité et l'ingrédient à recipe_book.txt
 def recipe_write(amount, unit, description):
     recipe= open("recipe_book.txt", "a")
     print (amount,' ', unit,' ',description, file=recipe)
     recipe.close()
 
-#prints nutritional information to recipe_book.txt
+#Imprime des informations nutritionnelles sur recipe_book.txt
 def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar):
     recipe= open("recipe_book.txt", "a")
     print ("Nutritional information", file=recipe)
@@ -117,16 +118,16 @@ def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sug
     print ("Sugar: ", round(tot_sugar, 2),' gm', file=recipe)
     recipe.close()
     
-'''This function converts the nutritional values for each nutrient in each
-ingredient from per 100 gm to what ever is called for in the recipe.
-For example, coverts nutritional information for 100 gms of flour to nutritional
-information for 2 sups flour.  If needed, units (cup, tsp, tbsp) are converted into
-whatever is the most common unit for that ingredient.  For example, a recipe gives
-the flour amount in tbsp, this will be converted into cups (the most commonly
-used unit to measure flour).'''
+'''Cette fonction convertit les valeurs nutritionnelles de chaque nutriment dans chaque
+Ingrédient par 100 gm pour ce qui est jamais demandé dans la recette.
+Par exemple, couvre l'information nutritionnelle pour 100 grammes de farine à la nutrition
+Information pour 2 sups farine. Si nécessaire, les unités (tasse, tsp, tbsp) sont convertis en
+Quelle que soit l'unité la plus commune pour cet ingrédient. Par exemple, une recette donne
+La quantité de farine en tbsp, ce sera converti en tasses (le plus couramment
+Utilisé pour mesurer la farine).'''
 def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodium, sugar\
             , convert_wt, convert_num, convert_unit):
-    #Convert factors
+    #Convertir des facteurs
     tspInCup= 48.0
     tbspInCup= 16.0
     tspInTbsp= 3.0
@@ -285,10 +286,10 @@ def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodiu
             converted_ing.append(round(i, 2))
         return converted_ing
 
-'''The following functions write recipe information to two separate databases,
-recipe.sqlite and ingredients.sqlite.'''
+'''Les fonctions suivantes écrivent des informations de recette à deux bases de données distinctes,
+Recette.sqlite et ingredients.sqlite.'''
 
-#adds recipe title and generates recipe_id.
+#Ajoute le titre de la recette et génère recipe_id.
 def recipe_write_dbase(title, servSize):
     conn= sqlite3.connect("recipe.sqlite")
     try:
@@ -303,7 +304,7 @@ def recipe_write_dbase(title, servSize):
     finally:
         conn.close()
 
-#Grabs recipe_id to be used as key for ingredients.
+#Attrape recepe_id à utiliser comme clé pour les ingrédients.
 def id_grabber(title):
     conn= sqlite3.connect("recipe.sqlite")
     try:
@@ -324,8 +325,8 @@ def id_grabber(title):
 
     return recipe_id
 
-#Writes ingredients to ingredients.sqlite.  Also adds recipe_id so ingredients can
-#be retrieved.
+#Écrit les ingrédients dans les ingrédients.sqlite. Ajoute également recipe_id afin que les ingrédients puissent
+#être récupérés.
 def ingredient_write_dbase(recipe_id, amount, unit, ingredient, converted_ingr):
     calories, protein, fat, carbohydrates, sodium, sugar= converted_ingr
     conn= sqlite3.connect("ingredients.sqlite")
@@ -342,3 +343,4 @@ def ingredient_write_dbase(recipe_id, amount, unit, ingredient, converted_ingr):
 
     
 main()
+
