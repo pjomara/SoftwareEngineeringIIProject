@@ -29,7 +29,6 @@ def main():
         ingredient = input("Entrez l'ingrédient: ")
         if ingredient:
             ingredients =[]
-            ####
             description, calories, protein, fat, carbohydrates, sodium,\
                 sugar, convert_wt, convert_num, convert_unit=\
                 nutr_grabber(ingredient)
@@ -109,13 +108,13 @@ def recipe_write(amount, unit, description):
 #Imprime des informations nutritionnelles sur recipe_book.txt
 def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar):
     recipe= open("recipe_book.txt", "a")
-    print ("Nutritional information", file=recipe)
-    print ("calories: ",round(tot_calories,0), file=recipe)
-    print ("Protein: ", round(tot_protein, 2),' gm', file=recipe)
-    print ("Fat: ", round(tot_fat, 2), ' gm', file=recipe)
-    print ("Carbohydrates: ", round(tot_carb, 2),' gm', file=recipe)
+    print ("Information nutritionnelle", file=recipe)
+    print ("Calories: ",round(tot_calories,0), file=recipe)
+    print ("Protéine: ", round(tot_protein, 2),' gm', file=recipe)
+    print ("Graisse: ", round(tot_fat, 2), ' gm', file=recipe)
+    print ("Les glucides: ", round(tot_carb, 2),' gm', file=recipe)
     print ("Sodium: ", round(tot_sodium, 2),' mg', file=recipe)
-    print ("Sugar: ", round(tot_sugar, 2),' gm', file=recipe)
+    print ("Sucre: ", round(tot_sugar, 2),' gm', file=recipe)
     recipe.close()
     
 '''Cette fonction convertit les valeurs nutritionnelles de chaque nutriment dans chaque
