@@ -1,8 +1,9 @@
 #!/usr/bin/env python 
+# -*- coding: latin-1 -*
 
 # Unicode translation Referenced from: https://docs.python.org/3/howto/unicode.html
 
-# -*- coding: latin-1 -*
+
 
 #Class referenced from http://stackoverflow.com/questions/8924173/how-do-i-print-bold-text-in-python
 
@@ -44,7 +45,7 @@ print line.UNDERLINE + "Quantité par portion           " + line.END
 print line.UNDERLINE + "Calories ", int(cal), "                 " + line.END
 #print "          % Daily Value*"
 print line.UNDERLINE + "          % Valeur quotidienne*" + line.END
-print line.UNDERLINE + "Lipides ", int(fat), "g       ", int(ft_dv),"%" + line.END
+print line.UNDERLINE + "Lipides ", int(fat), "g             ", int(ft_dv),"%" + line.END
 print line.UNDERLINE + "   Saturé ", int(sat), "g                 " + line.END
 print line.UNDERLINE + "Cholestérol ", int(chol), "mg       ", int(chol_dv), "%" + line.END
 print line.UNDERLINE + "Sodium ", int(sod), "mg             ", int(sod_dv), "%" + line.END
