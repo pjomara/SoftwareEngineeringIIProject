@@ -8,7 +8,7 @@
         <item>tsp</item>
         <item>tbsp</item>
         <item>cup</item>
-        <item>fl.oz</item>
+        <item>oz</item>
         <item>lb</item>
     </string-array>
 </resources>
