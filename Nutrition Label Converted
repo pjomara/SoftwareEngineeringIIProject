@@ -1,7 +1,10 @@
 #!/usr/bin/env python 
+
+# Unicode translation Referenced from: https://docs.python.org/3/howto/unicode.html
+
 # -*- coding: latin-1 -*
 
-#Code referenced from http://stackoverflow.com/questions/8924173/how-do-i-print-bold-text-in-python
+#Class referenced from http://stackoverflow.com/questions/8924173/how-do-i-print-bold-text-in-python
 
 class line:
    BOLD = '\033[1m'
@@ -41,15 +44,15 @@ print line.UNDERLINE + "Quantité par portion           " + line.END
 print line.UNDERLINE + "Calories ", int(cal), "                 " + line.END
 #print "          % Daily Value*"
 print line.UNDERLINE + "          % Valeur quotidienne*" + line.END
-print line.UNDERLINE + "Total Fat ", int(fat), "g           ", int(ft_dv),"%" + line.END
-print line.UNDERLINE + "   Saturated Fat ", int(sat), "g          " + line.END
-print line.UNDERLINE + "   Trans Fat ", int(tran), "g              " + line.END
-print line.UNDERLINE + "Cholesterol ", int(chol), "mg       ", int(chol_dv), "%" + line.END
+print line.UNDERLINE + "Lipides ", int(fat), "g       ", int(ft_dv),"%" + line.END
+print line.UNDERLINE + "   Saturé ", int(sat), "g                 " + line.END
+print line.UNDERLINE + "Cholestérol ", int(chol), "mg       ", int(chol_dv), "%" + line.END
 print line.UNDERLINE + "Sodium ", int(sod), "mg             ", int(sod_dv), "%" + line.END
-print line.UNDERLINE + "Total Carbohydrate ", int(carb), "g   ", int(carb_dv), "%" + line.END
-print line.UNDERLINE + "   Sugars ", int(sug), "g                " + line.END
-print line.UNDERLINE + "Protein ", int(prot), "g               ", int(prot_dv), "%" + line.END
+print line.UNDERLINE + "Glucides ", int(carb), "g             ", int(carb_dv), "%" + line.END
+print line.UNDERLINE + "   Sucres ", int(sug), "g                " + line.END
+print line.UNDERLINE + "Protéines ", int(prot), "g             ", int(prot_dv), "%" + line.END
 print line.UNDERLINE + "_______________________________" + line.END
-print "*Percent Daily Values are based"
-print line.UNDERLINE + " on a 2,000 calorie diet.      " + line.END
+print "*Pourcentage des valeurs "
+print "quotidiennes sur un régime de "
+print line.UNDERLINE + "2,000 calories.                " + line.END
 print "\n"
