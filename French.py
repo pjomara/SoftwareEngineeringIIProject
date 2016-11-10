@@ -10,22 +10,22 @@ import sqlite3
 
 def main():
     recipe =[]
-    title= input("Enter the recipe title: ")
-    servSize= eval(input("Enter the serving size: "))
+    title= input("Entrez le titre de la recette: ")
+    servSize= eval(input("Entrez la taille de la portion: "))
     recipe.append(title)
     recipe.append(servSize)
     title_write(title, servSize)
-    more= 'yes'
+    more= 'oui'
     tot_calories= float(0)
     tot_protein= float(0)
     tot_fat= float(0)
     tot_carb= float(0)
     tot_sodium= float(0)
     tot_sugar= float(0)
-    while more == 'yes':
-        amount = eval(input("Enter amount: "))
-        unit = input("Enter the unit(I.E.- cup, tsp); ")
-        ingredient = input("Enter the ingredient: ")
+    while more == 'oui':
+        amount = eval(input("Entrer le montant: "))
+        unit = input("Entrer dans l'unité (I.E.- cup, tsp); ")
+        ingredient = input("Entrez l'ingrédient: ")
         if ingredient:
             ingredients =[]
             description, calories, protein, fat, carbohydrates, sodium,\
@@ -43,7 +43,7 @@ def main():
             tot_carb = tot_carb + converted_ingr[3]
             tot_sodium= tot_sodium + converted_ingr[4]/1000
             tot_sugar= tot_sugar + converted_ingr[5]
-            more = input("More ingredients? (Enter 'yes' or 'no'):")
+            more = input("Plus d'ingrédients? (Entrez 'oui' ou 'non'):")
     nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, servSize)
     #recipe.append(ingredients)
     num_ingr = len(recipe)-1
@@ -94,7 +94,7 @@ def nutr_grabber(ingredient):
 def title_write(title, servSize):
     recipe= open("recipe_book.txt", "a")
     print (title, file=recipe)
-    print ("Service size: ", servSize, file=recipe)
+    print ("Portion: ", servSize, file=recipe)
     recipe.close()
 
 #prints amount, unit, and ingredient to recipe_book.txt
@@ -117,13 +117,13 @@ def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sug
 
     tot_ft_dv =65.0
     tot_chol_dv =300.0
-    #tot_sod_dv =2400.0
+    tot_sod_dv =2400.0
     tot_carb_dv =300.0
     tot_prot_dv =50.0
 
     ft_dv= (tot_fat/tot_ft_dv)*100
     #chol_dv= (tot_chol/tot_chol_dv)*100
-    #sod_dv= (tot_sodium/tot_sod_dv)*100
+    sod_dv= (tot_sodium/tot_sod_dv)*100
     carb_dv= (tot_carb/tot_carb_dv)*100
     prot_dv= (tot_protein/tot_prot_dv)*100
 
@@ -131,27 +131,26 @@ def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sug
 
     print ("\n", file=recipe)
     print ("_______________________________", file=recipe)
-    #print line.BOLD + "Nutrition Facts"
     print ("Valeur Nutritive", file=recipe)
     print ("_______________________________", file=recipe)
     print ("Portion ", int(servSize), file=recipe)
-    print ("_______________________________", file=recipe)
-    #print "Amount Per Serving             "
+    print ("_______________________________", file=recipe) 
     print ("Quantité par portion", file=recipe)
     print ("_______________________________", file=recipe)
     print ("Calories ", int(tot_calories), file=recipe)
     print ("_______________________________", file=recipe)
-    #print "          % Daily Value*"
     print ("          % Valeur quotidienne*", file=recipe)
     print ("_______________________________", file=recipe)
     print ("Lipides ", int(tot_fat), "g           ", int(ft_dv),"%", file=recipe)
     print ("_______________________________", file=recipe)
     #print ("   Saturé ", int(sat), "g                 ", file=recipe)
     #print ("Cholestérol ", int(chol), "mg       ", int(chol_dv), "%", file=recipe)
-    #print ("Sodium ", int(tot_sod), "mg             ", int(sod_dv), "%", file=recipe)
+    print ("Sodium ", int(tot_sodium), "mg             ", int(sod_dv), "%", file=recipe)
+    print ("_______________________________", file=recipe)
     print ("Glucides ", int(tot_carb), "g          ", int(carb_dv), "%", file=recipe)
     print ("_______________________________", file=recipe)
-    #print ("   Sucres ", int(sug), "g                ", file=recipe)
+    print ("   Sucres ", int(tot_sugar), "g                ", file=recipe)
+    print ("_______________________________", file=recipe)
     print ("Protéines ", int(tot_protein), "g         ", int(prot_dv), "%", file=recipe)
     print ("_______________________________", file=recipe)
     print ("*Pourcentage des valeurs ", file=recipe)
@@ -160,13 +159,6 @@ def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sug
     print ("_______________________________", file=recipe)
     print ("\n", file=recipe)
 
-#    print ("\n","Nutritional information", file=recipe)
- #   print ("calories: ",round(tot_calories,0), file=recipe)
-  #  print ("Protein: ", round(tot_protein, 2),' gm', file=recipe)
-   # print ("Fat: ", round(tot_fat, 2), ' gm', file=recipe)
-    #print ("Carbohydrates: ", round(tot_carb, 2),' gm', file=recipe)
-   # print ("Sodium: ", round(tot_sodium, 2),' mg', file=recipe)
-  #  print ("Sugar: ", round(tot_sugar, 2),' gm', file=recipe)
     recipe.close()
     
 '''This function converts the nutritional values for each nutrient in each
@@ -338,5 +330,4 @@ def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodiu
         return converted_ing
     
 main()
-
 
