@@ -134,7 +134,7 @@ def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sug
     #print line.BOLD + "Nutrition Facts"
     print ("Valeur Nutritive", file=recipe)
     print ("_______________________________", file=recipe)
-    print ("Portion ", int(servSize), "g", file=recipe)
+    print ("Portion ", int(servSize), file=recipe)
     print ("_______________________________", file=recipe)
     #print "Amount Per Serving             "
     print ("Quantité par portion", file=recipe)
