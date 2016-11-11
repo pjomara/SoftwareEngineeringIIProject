@@ -20,3 +20,8 @@ sprint ending 11/11
 - Conduct extensive testing on conversion functions
 - Re-work converter() function
 
+sprint ending 11/25
+-Rework nutrition label to write in HTML file
+-Continue development of user interface
+-implement re-written converter() function
+-add cholesterol, saturated and unsaturated fat
