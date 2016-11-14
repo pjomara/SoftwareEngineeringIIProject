@@ -57,3 +57,19 @@ Sean completed most of the conversion to french.  He translated all comments, in
 
 User interface
 Steve continues working on the user interface.
+
+Progress report for week ending 11/12
+
+Database
+Not much progress on adding a database with a more extensive collection of ingredients.  There are two obvious challenges to implementing this version of the database:
+1.  Many ingredients don't fit the conversion solution used in the app code.  For instance, the units for artichokes are "small artichoke" and "large artichoke".  Our code, as currently written, cannot convert betweeen 100 gms and large/small.  To correct this would require either going through all ingredients and converting this field into units that the code can handle or changing the code to handle the field as is.  The first solution is not practical as there are approximately 6500 ingredients.  The second is challenging because it will probably require a significant re-write of the code.
+2. Many searches will return mutliple hits.  For example, searching the word "flour" will return multiple items containing the word "flour".  To enalbe the user to select the correct ingredient will require some sort of a drop-down list from which ingredients can be selected.  For this, the command-line app currently being developed will not be sufficient.  Currently, several group members develop code in Python.  This code is tested and then passed to another group member who is developing the user interface using C# and Visual Studio.  The rub is that only one group member knows C#, therefore, only he would be able to code for this new development approach.  That is, unless a user interface could be developed in the Python branch.  The challenge here is that no group members know a Python user-interface module (IE- TKinter).  We have not decided what avenue to follow.
+
+French conversion
+The French version was completed in both C# (User interface) and Python (commande line) versions
+
+Improved nutrition label
+Eric continues working on this.  The label uses HTML formatting but is not compiling correctly in the recipe txt file.
+
+User interface
+Steve spent last week working on the French version.  
