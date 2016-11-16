@@ -25,3 +25,4 @@ sprint ending 11/25
 -Continue development of user interface
 -implement re-written converter() function
 -add cholesterol, saturated and unsaturated fat
+-add error handling
