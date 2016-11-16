@@ -135,8 +135,8 @@ information for 2 sups flour.  If needed, units (cup, tsp, tbsp) are converted i
 whatever is the most common unit for that ingredient.  For example, a recipe gives
 the flour amount in tbsp, this will be converted into cups (the most commonly
 used unit to measure flour).'''
-def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodium, sugar\
-            , convert_wt, convert_num, convert_unit):
+def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodium, sugar, sat_fat\
+            , cholesterol, convert_wt, convert_num, convert_unit):
     #Convert factors
     tspInCup= 48.0
     tbspInCup= 16.0
@@ -146,7 +146,7 @@ def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodiu
     ozInLb= 16.0
     
     ing_list= [float(calories), float(protein), float(fat), float(carbohydrates)\
-               , float(sodium), float(sugar)]
+               , float(sodium), float(sugar), float(sat_fat), float(cholesterol)]
     
     convert_val= float
     convert_wt= float(convert_wt)
@@ -338,13 +338,13 @@ def id_grabber(title):
 #Writes ingredients to ingredients.sqlite.  Also adds recipe_id so ingredients can
 #be retrieved.
 def ingredient_write_dbase(recipe_id, amount, unit, ingredient, converted_ingr):
-    calories, protein, fat, carbohydrates, sodium, sugar= converted_ingr
+    calories, protein, fat, carbohydrates, sodium, sugar, sat_fat, cholesterol= converted_ingr
     conn= sqlite3.connect("ingredients.sqlite")
     try:
         c=conn.cursor()
         try:
-            c.execute("INSERT INTO ingredient (recipe_id, amount, unit, ingredient, calories, protein, fat, carbohydrates, sodium, sugar)\
-                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (recipe_id, amount, unit, ingredient, calories, protein, fat, carbohydrates, sodium, sugar,))
+            c.execute("INSERT INTO ingredient (recipe_id, amount, unit, ingredient, calories, protein, fat, carbohydrates, sodium, sugarsat_fat, cholesterol)\
+                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (recipe_id, amount, unit, ingredient, calories, protein, fat, carbohydrates, sodium, sugar, sat_fat, cholesterol))
             conn.commit()
         finally:
             c.close()
