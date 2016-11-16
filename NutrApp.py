@@ -1,4 +1,4 @@
-''This is a command-line program that asks for ingredient amount, unit, and name.
+'''This is a command-line program that asks for ingredient amount, unit, and name.
 Compiles each ingredient in a .txt file named recipe_book.txt.
 Queries an ingredient database, pulls nutritional info. for each ingredient.
 Prints cumulative nutritional info. to recipe_book.txt.  This version also puts all
@@ -12,7 +12,7 @@ def main():
     recipe =[]
     title= input("Enter the recipe title: ")
     servSize= eval(input("Enter the serving size: "))
-    recipe_write_dbase(title)
+    recipe_write_dbase(title, servSize)
     recipe.append(title)
     recipe.append(servSize)
     title_write(title, servSize)
@@ -23,6 +23,8 @@ def main():
     tot_carb= float(0)
     tot_sodium= float(0)
     tot_sugar= float(0)
+    tot_sat_fat= float(0)
+    tot_cholesterol= float(0)
     while more == 'yes':
         amount = eval(input("Enter amount: "))
         unit = input("Enter the unit(I.E.- cup, tsp); ")
@@ -30,13 +32,13 @@ def main():
         if ingredient:
             ingredients =[]
             description, calories, protein, fat, carbohydrates, sodium,\
-                sugar, convert_wt, convert_num, convert_unit=\
+                sugar, sat_fat, cholesterol, convert_wt, convert_num, convert_unit=\
                 nutr_grabber(ingredient)
             converted_ingr= convert(amount, servSize, unit, calories, protein, fat,\
-                                    carbohydrates, sodium, sugar, convert_wt,\
+                                    carbohydrates, sodium, sugar, sat_fat, cholesterol, convert_wt,\
                                     convert_num, convert_unit)
             recipe_id= id_grabber(title)
-            ingredient_write_dbase(recipe_id, amount, unit, converted_ingr)
+            ingredient_write_dbase(recipe_id, amount, unit, ingredient, converted_ingr)
             ingredients = [amount, unit, ingredient, converted_ingr]            
             recipe.append(ingredients)
             recipe_write(amount, unit, description)
@@ -44,20 +46,23 @@ def main():
             tot_protein = tot_protein + converted_ingr[1]
             tot_fat = tot_fat + converted_ingr[2]
             tot_carb = tot_carb + converted_ingr[3]
-            tot_sodium= tot_sodium + converted_ingr[4]/1000
+            tot_sodium= tot_sodium + converted_ingr[4]
             tot_sugar= tot_sugar + converted_ingr[5]
+            tot_sat_fat= tot_sat_fat + converted_ingr[6]
+            tot_cholesterol= tot_cholesterol + converted_ingr[7]
+            
             more = input("More ingredients? (Enter 'yes' or 'no'):")
     nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar)
     num_ingr = len(recipe)-1
     recipe.append(num_ingr)
-    print (recipe)
 
+'''Submits the ingredient name and returns the nutritional information.'''
 def nutr_grabber(ingredient):
-    conn= sqlite3.connect('USDADataProto.db')
+    conn= sqlite3.connect('USDAData.db')
     try:
         c = conn.cursor()
         try:
-            c.execute("select Shrt_Desc, Energ_Kcal, Protein_g, Lipid_Tot_g, Carbohydrt_g, Fiber_TD_g, Sugar_Tot_g, Calcium_mg, Iron_mg, Magnesium_mg, Sodium_mg, Gm_unit, num, unit from USDADataProto where Shrt_Desc like ?", ('%'+ingredient+'%',))
+            c.execute("select Shrt_Desc, Energ_Kcal, Protein_g, Lipid_Tot_g, Carbohydrt_g, Fiber_TD_g, Sugar_Tot_g, FA_Sat_g,Cholestrl_g, Calcium_mg, Iron_mg, Magnesium_mg, Sodium_mg, Gm_unit, num, unit from USDADataProto where Shrt_Desc like ?", ('%'+ingredient+'%',))
 
             row= c.fetchone()
             if row:
@@ -68,6 +73,8 @@ def nutr_grabber(ingredient):
                 carbohydrates= row[4]
                 sodium= row[10]
                 sugar= row[6]
+                Sat_fat= row[8]
+                Cholesterol= row[9]
                 convert_wt= row[11]
                 convert_num= row[12]
                 convert_unit= row[13]
@@ -80,6 +87,8 @@ def nutr_grabber(ingredient):
                 carbohydrates= None
                 sodium= None
                 sugar= None
+                Sat_fat= None
+                Cholesterol= None
                 convert_wt= None
                 convert_num= None
                 convert_unit= None
@@ -90,13 +99,13 @@ def nutr_grabber(ingredient):
     finally:
         conn.close()
 
-    return description, calories, protein, fat, carbohydrates, sodium, sugar, convert_wt, convert_num, convert_unit
+    return description, calories, protein, fat, carbohydrates, sodium, sugar, Sat_fat, Cholesterol, convert_wt, convert_num, convert_unit
 
 #prints title of recipe to recipe_book.txt
 def title_write(title, servSize):
     recipe= open("recipe_book.txt", "a")
     print (title, file=recipe)
-    print ("Service size: ", servSize, file=recipe)
+    print ("Serves: ", servSize, file=recipe)
     recipe.close()
 
 #prints amount, unit, and ingredient to recipe_book.txt
@@ -106,9 +115,7 @@ def recipe_write(amount, unit, description):
     recipe.close()
 
 #prints nutritional information to recipe_book.txt
-#as of 9/13/2016- prints per 100g for each ingredient.- This needs to be fixed
-    #fixed 9/29
-def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar):
+def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, Sat_fat, Cholesterol):
     recipe= open("recipe_book.txt", "a")
     print ("Nutritional information", file=recipe)
     print ("calories: ",round(tot_calories,0), file=recipe)
@@ -117,6 +124,8 @@ def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sug
     print ("Carbohydrates: ", round(tot_carb, 2),' gm', file=recipe)
     print ("Sodium: ", round(tot_sodium, 2),' mg', file=recipe)
     print ("Sugar: ", round(tot_sugar, 2),' gm', file=recipe)
+    print ("Saturated fat: ", round(Sat_fat, 2),' gm', file=recipe)
+    print ("Cholesterol: ", round(Cholesterol, 2), ' gm', file=recipe)
     recipe.close()
     
 '''This function converts the nutritional values for each nutrient in each
@@ -291,12 +300,12 @@ def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodiu
 recipe.sqlite and ingredients.sqlite.'''
 
 #adds recipe title and generates recipe_id.
-def recipe_write_dbase(title):
+def recipe_write_dbase(title, servSize):
     conn= sqlite3.connect("recipe.sqlite")
     try:
         c= conn.cursor()
         try:
-            c.execute("INSERT INTO recipe (recipe_title) VALUES (?)", (title,))
+            c.execute("INSERT INTO recipe (recipe_title, servSize) VALUES (?, ?)", (title, servSize,))
             conn.commit()
 
         finally:
@@ -328,14 +337,14 @@ def id_grabber(title):
 
 #Writes ingredients to ingredients.sqlite.  Also adds recipe_id so ingredients can
 #be retrieved.
-def ingredient_write_dbase(recipe_id, amount, unit, converted_ingr):
+def ingredient_write_dbase(recipe_id, amount, unit, ingredient, converted_ingr):
     calories, protein, fat, carbohydrates, sodium, sugar= converted_ingr
     conn= sqlite3.connect("ingredients.sqlite")
     try:
         c=conn.cursor()
         try:
-            c.execute("INSERT INTO ingredient (recipe_id, amount, unit, calories, protein, fat, carbohydrates, sodium, sugar)\
-                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (recipe_id, amount, unit, calories, protein, fat, carbohydrates, sodium, sugar,))
+            c.execute("INSERT INTO ingredient (recipe_id, amount, unit, ingredient, calories, protein, fat, carbohydrates, sodium, sugar)\
+                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (recipe_id, amount, unit, ingredient, calories, protein, fat, carbohydrates, sodium, sugar,))
             conn.commit()
         finally:
             c.close()
