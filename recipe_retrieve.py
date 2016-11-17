@@ -9,7 +9,6 @@ def main():
     recipe= input("What recipe would you like?- ")
     recipe_id, title, servSize= id_grabber(recipe)
     ingredients= get_ingredients(recipe_id)
-    print(ingredients)
     print_recipe(title, servSize, ingredients)
     print_nutrition(ingredients)
     
@@ -69,6 +68,8 @@ def print_nutrition(ingredients):
     carbohydrates= 0
     sodium= 0
     sugar= 0
+    sat_fat= 0
+    cholesterol= 0
     for i in ingredients:
         calories= calories + i[4]
         protein= protein + i[5]
@@ -76,12 +77,16 @@ def print_nutrition(ingredients):
         carbohydrates= carbohydrates + i[7]
         sodium = sodium + i[8]
         sugar= sugar + i[9]
+        sat_fat= sat_fat + i[10]
+        cholesterol= cholesterol + i[11]
     print ("\nNutritional information")
-    print("Calories: ", calories, " gm")
+    print("Calories: ", calories)
     print("Protein: ", protein, " gm")
     print("Fat: ", fat, " gm")
     print("Carbohydrates: ", carbohydrates, " gm")
     print("Sodium: ", sodium, " mg")
-    print("Sugar: ", sugar, " gm")
+    print("Sugar: ", round(sugar,2), " gm")
+    print("Saturated fat: ", sat_fat, " gm")
+    print("Cholesterol: ", cholesterol, " mg")
 
 main()

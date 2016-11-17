@@ -115,3 +115,27 @@ Fat:  86.4  gm
 Carbohydrates:  0.0  gm
 Sodium:  0.0  mg
 Sugar:  0.0  gm
+test1
+Serves:  1
+test2
+Serves:  1
+test3
+Serves:  1
+test4
+Serves:  1
+test5
+Serves:  1
+test6
+Serves:  1
+1   cup   WHOLE WHEAT FLOUR
+2   tsp   BUTTER MILK
+0.5   tsp   SALT
+Nutritional information
+calories:  499.0
+Protein:  16.75  gm
+Fat:  2.36  gm
+Carbohydrates:  99.86  gm
+Sodium:  1184.88  mg
+Sugar:  0.91  gm
+Saturated fat:  0.39  gm
+Cholesterol:  0.41  gm
