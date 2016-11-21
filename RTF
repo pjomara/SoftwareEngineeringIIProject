@@ -1,0 +1,8 @@
+#http://stackoverflow.com/questions/16162036/is-there-a-way-to-write-formatted-text-from-python
+
+recipe = 'recipe_book.rtf'
+out_file = open(recipe,'w')
+out_file.write("""{\\rtf1
+\\b Nutrition Facts  \\b0\line\
+}""")
+out_file.close()
