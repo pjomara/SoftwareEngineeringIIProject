@@ -25,4 +25,4 @@ TO BE WORKED ON:
 - A running list of the ingredients is not kept, meaning you can't view what the ingredient holds after submitting. *** Proabably be the next step to add***
 - Currently, the same ListView page is used for both the QuickSearch and Recipe. This means that recipe ingredients aren't listed, instead of just the recipe name it says "no data no data of RecipeName". ***Instead of the same page, a new page will probably be added that will also hold a button to view the ingredients***
 - Recipes are not saved.
-- When entering ingredients, after pressing add ingredient, the text in the boxes remains there, meaning you have to delete all the text before you can enter new text. This isn't app breaking or anything, but it is pretty annoying and tedious.
+
