@@ -57,6 +57,9 @@ def main():
             tot_sat_fat= tot_sat_fat + converted_ingr[6]
             tot_cholesterol= tot_cholesterol + converted_ingr[7]
             more = input("More ingredients? (Enter 'yes' or 'no'):")
+            while more != 'yes' and more != 'no':
+                print("You must enter either 'yes' or 'no'.  Try again...")
+                more = input("More ingredients? (Enter 'yes' or 'no'):") 
     nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, tot_sat_fat, tot_cholesterol)
     num_ingr = len(recipe)-1
     recipe.append(num_ingr)
