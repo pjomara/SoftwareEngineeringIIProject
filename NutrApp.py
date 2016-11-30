@@ -41,8 +41,8 @@ def main():
             nutr_grabber(ingredient)
         else:
             converted_ingr= convert(amount, servSize, unit, calories, protein, fat,\
-                                    carbohydrates, sodium, sugar, sat_fat, cholesterol, convert_wt,\
-                                    convert_num, convert_unit)
+            carbohydrates, sodium, sugar, sat_fat, cholesterol, convert_wt,\
+            convert_num, convert_unit)
             recipe_id= id_grabber(title)
             ingredient_write_dbase(recipe_id, amount, unit, ingredient, converted_ingr)
             ingredients = [amount, unit, ingredient, converted_ingr]            
@@ -123,7 +123,7 @@ def recipe_write(amount, unit, description):
     recipe.close()
 
 #prints nutritional information to recipe_book.txt
-def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, Sat_fat, Cholesterol):
+def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, servSize, Sat_fat, Cholesterol):
 
     tot_ft_dv =65.0
     tot_chol_dv =300.0
@@ -166,7 +166,7 @@ def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sug
     print ("based on a 2,000 calorie diet ", file=recipe)
     print ("_______________________________", file=recipe)
     print ("\n", file=recipe)
-recipe.close()
+    recipe.close()
     
 '''This function converts the nutritional values for each nutrient in each
 ingredient from per 100 gm to what ever is called for in the recipe.
@@ -177,6 +177,7 @@ the flour amount in tbsp, this will be converted into cups (the most commonly
 used unit to measure flour).'''
 def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodium, sugar, sat_fat\
             , cholesterol, convert_wt, convert_num, convert_unit):
+
     #Convert factors
     tspInCup= 48.0
     tbspInCup= 16.0
