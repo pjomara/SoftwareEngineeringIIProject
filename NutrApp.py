@@ -124,17 +124,49 @@ def recipe_write(amount, unit, description):
 
 #prints nutritional information to recipe_book.txt
 def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, Sat_fat, Cholesterol):
+
+    tot_ft_dv =65.0
+    tot_chol_dv =300.0
+    tot_sod_dv =2400.0
+    tot_carb_dv =300.0
+    tot_prot_dv =50.0
+
+    ft_dv= (tot_fat/tot_ft_dv)*100
+    chol_dv= (Cholesterol/tot_chol_dv)*100
+    sod_dv= (tot_sodium/tot_sod_dv)*100
+    carb_dv= (tot_carb/tot_carb_dv)*100
+    prot_dv= (tot_protein/tot_prot_dv)*100
+    sod_dv= (tot_sodium/tot_sod_dv)*100
+
     recipe= open("recipe_book.txt", "a")
-    print ("Nutritional information", file=recipe)
-    print ("calories: ",round(tot_calories,0), file=recipe)
-    print ("Protein: ", round(tot_protein, 2),' gm', file=recipe)
-    print ("Fat: ", round(tot_fat, 2), ' gm', file=recipe)
-    print ("Carbohydrates: ", round(tot_carb, 2),' gm', file=recipe)
-    print ("Sodium: ", round(tot_sodium, 2),' mg', file=recipe)
-    print ("Sugar: ", round(tot_sugar, 2),' gm', file=recipe)
-    print ("Saturated fat: ", round(Sat_fat, 2),' gm', file=recipe)
-    print ("Cholesterol: ", round(Cholesterol, 2), ' gm', file=recipe)
-    recipe.close()
+
+    print ("\n", file=recipe)
+    print ("_______________________________", file=recipe)
+    print ("Nutrition Facts", file=recipe)
+    print ("_______________________________", file=recipe)
+    print ("Serving Size ", int(servSize), file=recipe)
+    print ("_______________________________", file=recipe)
+    print ("Calories ", int(tot_calories), file=recipe)
+    print ("_______________________________", file=recipe)
+    print ("          % Daily Value*", file=recipe)
+    print ("_______________________________", file=recipe)
+    print ("Total Fat ", int(tot_fat), "g           ", int(ft_dv),"%", file=recipe)
+    print ("_______________________________", file=recipe)
+    print ("   Saturated Fat ", int(Sat_fat), "g              ",  file=recipe)
+    print ("Cholesterol ", int(Cholesterol), "mg       ", int(chol_dv), "%", file=recipe)
+    print ("Sodium ", int(tot_sodium), "mg             ", int(sod_dv), "%", file=recipe)
+    print ("_______________________________", file=recipe)
+    print ("Carbohydrates ", int(tot_carb), "g          ", int(carb_dv), "%", file=recipe)
+    print ("_______________________________", file=recipe)
+    print ("   Sugars ", int(tot_sugar), "g                ", file=recipe)
+    print ("_______________________________", file=recipe)
+    print ("Protein ", int(tot_protein), "g         ", int(prot_dv), "%", file=recipe)
+    print ("_______________________________", file=recipe)
+    print ("*Daily value percentages are ", file=recipe)
+    print ("based on a 2,000 calorie diet ", file=recipe)
+    print ("_______________________________", file=recipe)
+    print ("\n", file=recipe)
+recipe.close()
     
 '''This function converts the nutritional values for each nutrient in each
 ingredient from per 100 gm to what ever is called for in the recipe.
