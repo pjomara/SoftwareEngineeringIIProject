@@ -73,3 +73,8 @@ Eric continues working on this.  The label uses HTML formatting but is not compi
 
 User interface
 Steve spent last week working on the French version.  
+
+Progress report for week ending 12/3
+Error handling has been added to code
+Improved convert() function has been completed and implemented into code
+Improved nutritional label is still in-progress
