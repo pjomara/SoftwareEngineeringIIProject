@@ -89,3 +89,22 @@
                 -We will continue to test our program for bugs and to make sure that our changes that we make don't throw off any of our 
                  calculations. Testing will be important once we implement our data structures to make sure that it doesn't compromise any
                  of our results. 
+11/21/16-12/4/16
+            Work on upgrading the formatting of the Nutrition Label
+                -I have got the nutrition label to print out in our text document, but I am not satisfied with the appearance yet. I want it
+                 to look as close to an actual nutrition label as possible. I also have to rework in the new added categories of saturated fat
+                 and cholesterol.
+            Fix the reduced converter code
+                -We already have code written to reduce the size of our conversions so we don't have repetitive code. This code needs to be 
+                 edited and revamped in order to work properly. Once it is fixed, our code will be much shorter and much easier to read.
+            Add to the database
+                -We currently only have around 50 ingredients in the test database we have been using. We are looking to implement a much 
+                 larger database that contains more ingredients to increase our program's effeciency. In order to do this, we will have to
+                 rework queries and how our program finds results.
+            Error Handling
+                -We are looking to add error handling so that if an ingredient is entered that isn't in the database, instead of crashing, 
+                 an error would be returned saying that the ingredient couldn't be found. We may come up with a way to add new ingredients
+                 if we have enough time.
+            Add a tab to the interface
+                -By adding a tab to our interface, you will be able to go back and forth from an ingredients nutritional information and the
+                 nutritional information for the entire recipe.

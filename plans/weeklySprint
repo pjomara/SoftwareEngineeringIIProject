@@ -26,3 +26,10 @@ sprint ending 11/25
 -implement re-written converter() function
 -add cholesterol, saturated and unsaturated fat
 -add error handling
+
+sprint ending 12/9
+-UI will take ingredient info as input, will create drop-down if multiple ingredients match search query
+-UI will calculate nutrients
+-UI will present recipe and nutritional information on-screen
+-Implement new convert() 
+-Implement improved nutritional label

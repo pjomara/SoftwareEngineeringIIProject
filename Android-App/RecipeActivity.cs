@@ -1,8 +1,11 @@
 // This does basically the same as the quick search, except:
 // A total for all the nutrients is added.
-//The amount, unit, and name of ingredients are not currently passed, just the name of the recipe.
 // the submit button and recipe name are disabled until the user presses "done adding..". This is to prevent users from
 //accidentally pressing submit instead of "add ingredient" or such.
+
+//Added a short display message to let the user know their ingredient was successfully added.
+//Formatted the passed nutrients and name to new layout for proper formatting.
+//Also clears the text boxes so user doesn't have to manually do it
 
 
 using System;
@@ -20,7 +23,7 @@ using Android.Database.Sqlite;
 using System.Collections.Generic;
 using System.Collections;
 
-namespace nutr_grabber
+namespace NutriApp
 {
     [Activity(Label = "Recipe")]
     public class RecipeActivity : Activity
@@ -37,11 +40,13 @@ namespace nutr_grabber
         double amountEntered;
 
         string name;
+        string rName;
         double cal;
         double protein;
         double fat;
         double carbs;
         double sodium;
+        double chol;
         double sugar;
         double num;
         string unit;
@@ -51,6 +56,7 @@ namespace nutr_grabber
         double totFat;
         double totCarbs;
         double totSodium;
+        double totChol;
         double totSugar;
 
 
@@ -171,24 +177,29 @@ namespace nutr_grabber
 
                 foreach (var i in query)
                 {
-                   // name = i.Shrt_Desc;
+                    name = i.Shrt_Desc;
                     cal = i.Energ_Kcal;
                     protein = i.Protein_g;
                     fat = i.Lipid_Tot_g;
                     carbs = i.Carbohydrt_g;
                     sodium = i.Sodium_mg;
+                    chol = i.Cholestrl_mg;
                     sugar = i.Sugar_Tot_g;
                     num = i.num;
                     unit = i.unit;
                 }
 
+                //nutrient numbers get divded by the amount in the db
+                //put everything at a base level of 1
                 cal = cal / num;
                 protein = protein / num;
                 fat = fat / num;
                 carbs = carbs / num;
                 sodium = sodium / num;
+                chol = chol / num;
                 sugar = sugar / num;
 
+                //unit conversions
                 if (unit == unitEntered)
                 {
                     cal = cal * amountEntered;
@@ -196,6 +207,7 @@ namespace nutr_grabber
                     fat = fat * amountEntered;
                     carbs = carbs * amountEntered;
                     sodium = sodium * amountEntered;
+                    chol = chol * amountEntered;
                     sugar = sugar * amountEntered;
                 }
                 else if (unit == "cup" && unitEntered == "tbsp")
@@ -205,6 +217,7 @@ namespace nutr_grabber
                     fat = (fat / tbspInCup) * amountEntered;
                     carbs = (carbs / tbspInCup) * amountEntered;
                     sodium = (sodium / tbspInCup) * amountEntered;
+                    chol = (chol / tbspInCup) * amountEntered;
                     sugar = (sugar / tbspInCup) * amountEntered;
                 }
                 else if (unit == "cup" && unitEntered == "tsp")
@@ -214,6 +227,7 @@ namespace nutr_grabber
                     fat = (fat / tspInCup) * amountEntered;
                     carbs = (carbs / tspInCup) * amountEntered;
                     sodium = (sodium / tspInCup) * amountEntered;
+                    chol = (chol / tspInCup) * amountEntered;
                     sugar = (sugar / tspInCup) * amountEntered;
                 }
                 else if (unit == "tsp" && unitEntered == "cup")
@@ -223,6 +237,7 @@ namespace nutr_grabber
                     fat = (fat * tspInCup) * amountEntered;
                     carbs = (carbs * tspInCup) * amountEntered;
                     sodium = (sodium * tspInCup) * amountEntered;
+                    chol = (chol * tspInCup) * amountEntered;
                     sugar = (sugar * tspInCup) * amountEntered;
                 }
                 else if (unit == "tsp" && unitEntered == "tbsp")
@@ -232,6 +247,7 @@ namespace nutr_grabber
                     fat = (fat * tspInTbsp) * amountEntered;
                     carbs = (carbs * tspInTbsp) * amountEntered;
                     sodium = (sodium * tspInTbsp) * amountEntered;
+                    chol = (chol * tspInTbsp) * amountEntered;
                     sugar = (sugar * tspInTbsp) * amountEntered;
                 }
                 else if (unit == "tbsp" && unitEntered == "cup")
@@ -241,6 +257,7 @@ namespace nutr_grabber
                     fat = (fat * tbspInCup) * amountEntered;
                     carbs = (carbs * tbspInCup) * amountEntered;
                     sodium = (sodium * tbspInCup) * amountEntered;
+                    chol = (chol * tbspInCup) * amountEntered;
                     sugar = (sugar * tbspInCup) * amountEntered;
                 }
                 else if (unit == "tbsp" && unitEntered == "tsp")
@@ -250,6 +267,7 @@ namespace nutr_grabber
                     fat = (fat / tspInTbsp) * amountEntered;
                     carbs = (carbs / tspInTbsp) * amountEntered;
                     sodium = (sodium / tspInTbsp) * amountEntered;
+                    chol = (chol / tspInTbsp) * amountEntered;
                     sugar = (sugar / tspInTbsp) * amountEntered;
                 }
                 else if (unit == "oz" && unitEntered == "tbsp")
@@ -259,6 +277,7 @@ namespace nutr_grabber
                     fat = (fat / ozInTbsp) * amountEntered;
                     carbs = (carbs / ozInTbsp) * amountEntered;
                     sodium = (sodium / ozInTbsp) * amountEntered;
+                    chol = (chol / ozInTbsp) * amountEntered;
                     sugar = (sugar / ozInTbsp) * amountEntered;
                 }
                 else if (unit == "oz" && unitEntered == "cup")
@@ -268,6 +287,7 @@ namespace nutr_grabber
                     fat = (fat * ozInCup) * amountEntered;
                     carbs = (carbs * ozInCup) * amountEntered;
                     sodium = (sodium * ozInCup) * amountEntered;
+                    chol = (chol * ozInCup) * amountEntered;
                     sugar = (sugar * ozInCup) * amountEntered;
                 }
                 else if (unit == "tbsp" && unitEntered == "oz")
@@ -277,6 +297,7 @@ namespace nutr_grabber
                     fat = (fat * ozInTbsp) * amountEntered;
                     carbs = (carbs * ozInTbsp) * amountEntered;
                     sodium = (sodium * ozInTbsp) * amountEntered;
+                    chol = (chol * ozInTbsp) * amountEntered;
                     sugar = (sugar * ozInTbsp) * amountEntered;
                 }
                 else if (unit == "cup" && unitEntered == "oz")
@@ -286,6 +307,7 @@ namespace nutr_grabber
                     fat = (fat / ozInTbsp) * amountEntered;
                     carbs = (carbs / ozInTbsp) * amountEntered;
                     sodium = (sodium / ozInTbsp) * amountEntered;
+                    chol = (chol / ozInTbsp) * amountEntered;
                     sugar = (sugar / ozInTbsp) * amountEntered;
                 }
                 else if (unit == "oz" && unitEntered == "lb")
@@ -295,6 +317,7 @@ namespace nutr_grabber
                     fat = (fat * ozInLb) * amountEntered;
                     carbs = (carbs * ozInLb) * amountEntered;
                     sodium = (sodium * ozInLb) * amountEntered;
+                    chol = (chol * ozInLb) * amountEntered;
                     sugar = (sugar * ozInLb) * amountEntered;
                 }
                 else if (unit == "lb" && unitEntered == "oz")
@@ -304,10 +327,9 @@ namespace nutr_grabber
                     fat = (fat / ozInLb) * amountEntered;
                     carbs = (carbs / ozInLb) * amountEntered;
                     sodium = (sodium / ozInLb) * amountEntered;
+                    chol = (chol / ozInLb) * amountEntered;
                     sugar = (sugar / ozInLb) * amountEntered;
                 }
-
-
 
 
                 // formats doubles to 2 decimal places
@@ -316,40 +338,57 @@ namespace nutr_grabber
                 fat = Math.Round(fat, 2);
                 carbs = Math.Round(carbs, 2);
                 sodium = Math.Round(sodium, 2);
+                chol = Math.Round(chol, 2);
                 sugar = Math.Round(sugar, 2);
 
+                //keeps track of total amounts
                 totCal = totCal + cal;
                 totProtein = totProtein + protein;
                 totFat = totFat + fat;
                 totCarbs = totCarbs + carbs;
                 totSodium = totSodium + sodium;
+                totChol = totChol + chol;
                 totSugar = totSugar + sugar;
+
+                //reformats text boxes to blank (so user doesn't have to manually backspace everything)
+                amount.Text = "";
+                autoIngred.Text = "";
+
+                ////  var third = new Intent(this, typeof(iReList));
+                //  third.PutExtra("name", Convert.ToString(name));
+                //  third.PutExtra("num", Convert.ToString(amountEntered));
+                //  third.PutExtra("unit", unitEntered);
+
+
+                //gives user a message to let them know it was succesfully added
+                string toastMessage = amountEntered + " " + unitEntered + "/s of " + name + " added to recipe";
+                Toast.MakeText(this, toastMessage, ToastLength.Short).Show();
 
             };
 
             done.Click += (object sender, EventArgs e) =>
             {
-                message4.Enabled = true; 
+                message4.Enabled = true;
                 recipeName.Enabled = true;
                 submit.Enabled = true;
-               
+
             };
 
             submit.Click += (object sender, EventArgs e) =>
             {
-                name = recipeName.Text;
+                rName = recipeName.Text;
                 // sets the intent to pass the info to listdisplay activity
-                var second = new Intent(this, typeof(ListDisplay));
+                var second = new Intent(this, typeof(nReList));
                 // passes items to second activity, then launches the new activity
-                second.PutExtra("name", Convert.ToString(name));
+                second.PutExtra("rName", Convert.ToString(rName));
                 second.PutExtra("Kcal", Convert.ToString(totCal));
                 second.PutExtra("protein", Convert.ToString(totProtein));
                 second.PutExtra("fat", Convert.ToString(totFat));
                 second.PutExtra("carbs", Convert.ToString(totCarbs));
                 second.PutExtra("sodium", Convert.ToString(totSodium));
+                second.PutExtra("chol", Convert.ToString(totChol));
                 second.PutExtra("sugar", Convert.ToString(totSugar));
-              //  second.PutExtra("num", Convert.ToString(amountEntered));
-               // second.PutExtra("unit", unitEntered);
+
                 StartActivity(second);
             };
 
