@@ -23,17 +23,25 @@ def main():
     tot_carb= float(0)
     tot_sodium= float(0)
     tot_sugar= float(0)
+    tot_sat_fat= float(0)
+    tot_cholesterol= float(0)
     while more == 'yes':
         amount = eval(input("Enter amount: "))
         unit = input("Enter the unit(I.E.- cup, tsp); ")
         ingredient = input("Enter the ingredient: ")
-        if ingredient:
-            ingredients =[]
+        ingredients =[]
+        description, calories, protein, fat, carbohydrates, sodium,\
+            sugar, sat_fat, cholesterol, convert_wt, convert_num, convert_unit=\
+            nutr_grabber(ingredient)
+        while description== None:
+            print("Ingredient not found in database.  Try again: ")
+            ingredient = input("Enter the ingredient: ")
             description, calories, protein, fat, carbohydrates, sodium,\
-                sugar, convert_wt, convert_num, convert_unit=\
-                nutr_grabber(ingredient)
+            sugar, sat_fat, cholesterol, convert_wt, convert_num, convert_unit=\
+            nutr_grabber(ingredient)
+        else:
             converted_ingr= convert(amount, servSize, unit, calories, protein, fat,\
-                                    carbohydrates, sodium, sugar, convert_wt,\
+                                    carbohydrates, sodium, sugar, sat_fat, cholesterol, convert_wt,\
                                     convert_num, convert_unit)
             recipe_id= id_grabber(title)
             ingredient_write_dbase(recipe_id, amount, unit, ingredient, converted_ingr)
@@ -46,8 +54,13 @@ def main():
             tot_carb = tot_carb + converted_ingr[3]
             tot_sodium= tot_sodium + converted_ingr[4]
             tot_sugar= tot_sugar + converted_ingr[5]
+            tot_sat_fat= tot_sat_fat + converted_ingr[6]
+            tot_cholesterol= tot_cholesterol + converted_ingr[7]
             more = input("More ingredients? (Enter 'yes' or 'no'):")
-    nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar)
+            while more != 'yes' and more != 'no':
+                print("You must enter either 'yes' or 'no'.  Try again...")
+                more = input("More ingredients? (Enter 'yes' or 'no'):") 
+    nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, tot_sat_fat, tot_cholesterol)
     num_ingr = len(recipe)-1
     recipe.append(num_ingr)
 
@@ -57,7 +70,7 @@ def nutr_grabber(ingredient):
     try:
         c = conn.cursor()
         try:
-            c.execute("select Shrt_Desc, Energ_Kcal, Protein_g, Lipid_Tot_g, Carbohydrt_g, Fiber_TD_g, Sugar_Tot_g, Calcium_mg, Iron_mg, Magnesium_mg, Sodium_mg, Gm_unit, num, unit from USDADataProto where Shrt_Desc like ?", ('%'+ingredient+'%',))
+            c.execute("select Shrt_Desc, Energ_Kcal, Protein_g, Lipid_Tot_g, Carbohydrt_g, Fiber_TD_g, Sugar_Tot_g, FA_Sat_g,Cholestrl_mg, Calcium_mg, Iron_mg, Magnesium_mg, Sodium_mg, Gm_unit, num, unit from USDADataProto where Shrt_Desc like ?", ('%'+ingredient+'%',))
 
             row= c.fetchone()
             if row:
@@ -66,11 +79,14 @@ def nutr_grabber(ingredient):
                 protein= row[2]
                 fat= row[3]
                 carbohydrates= row[4]
-                sodium= row[10]
+                sodium= row[12]
                 sugar= row[6]
-                convert_wt= row[11]
-                convert_num= row[12]
-                convert_unit= row[13]
+                Sat_fat= row[7]
+                Cholesterol= row[8]
+                convert_wt= row[13]
+                convert_num= row[14]
+                convert_unit= row[15]
+
                 
             else:
                 description = None
@@ -80,17 +96,18 @@ def nutr_grabber(ingredient):
                 carbohydrates= None
                 sodium= None
                 sugar= None
+                Sat_fat= None
+                Cholesterol= None
                 convert_wt= None
                 convert_num= None
                 convert_unit= None
-
         finally:
             c.close()
 
     finally:
         conn.close()
 
-    return description, calories, protein, fat, carbohydrates, sodium, sugar, convert_wt, convert_num, convert_unit
+    return description, calories, protein, fat, carbohydrates, sodium, sugar, Sat_fat, Cholesterol, convert_wt, convert_num, convert_unit
 
 #prints title of recipe to recipe_book.txt
 def title_write(title, servSize):
@@ -106,48 +123,17 @@ def recipe_write(amount, unit, description):
     recipe.close()
 
 #prints nutritional information to recipe_book.txt
-def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar):
-
-    tot_ft_dv =65.0
-    tot_chol_dv =300.0
-    tot_sod_dv =2400.0
-    tot_carb_dv =300.0
-    tot_prot_dv =50.0
-
-    ft_dv= (tot_fat/tot_ft_dv)*100
-    chol_dv= (tot_chol/tot_chol_dv)*100
-    sod_dv= (tot_sodium/tot_sod_dv)*100
-    carb_dv= (tot_carb/tot_carb_dv)*100
-    prot_dv= (tot_protein/tot_prot_dv)*100
-
+def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, Sat_fat, Cholesterol):
     recipe= open("recipe_book.txt", "a")
-
-    print ("\n", file=recipe)
-    print ("_______________________________", file=recipe)
-    print ("Nutrition Facts", file=recipe)
-    print ("_______________________________", file=recipe)
-    print ("Serving Size ", int(servSize), file=recipe)
-    print ("_______________________________", file=recipe)
-    print ("Calories ", int(tot_calories), file=recipe)
-    print ("_______________________________", file=recipe)
-    print ("          % Daily Value*", file=recipe)
-    print ("_______________________________", file=recipe)
-    print ("Total Fat ", int(tot_fat), "g           ", int(ft_dv),"%", file=recipe)
-    print ("_______________________________", file=recipe)
-    print ("   Saturated Fat ", int(sat), "g                 ", file=recipe)
-    print ("Cholesterol ", int(chol), "mg       ", int(chol_dv), "%", file=recipe)
-    print ("Sodium ", int(tot_sodium), "mg             ", int(sod_dv), "%", file=recipe)
-    print ("_______________________________", file=recipe)
-    print ("Carbohydrates ", int(tot_carb), "g          ", int(carb_dv), "%", file=recipe)
-    print ("_______________________________", file=recipe)
-    print ("   Sugars ", int(tot_sugar), "g                ", file=recipe)
-    print ("_______________________________", file=recipe)
-    print ("Protein ", int(tot_protein), "g         ", int(prot_dv), "%", file=recipe)
-    print ("_______________________________", file=recipe)
-    print ("*Daily value percentages are ", file=recipe)
-    print ("based on a 2,000 calorie diet ", file=recipe)
-    print ("_______________________________", file=recipe)
-    print ("\n", file=recipe)
+    print ("Nutritional information", file=recipe)
+    print ("calories: ",round(tot_calories,0), file=recipe)
+    print ("Protein: ", round(tot_protein, 2),' gm', file=recipe)
+    print ("Fat: ", round(tot_fat, 2), ' gm', file=recipe)
+    print ("Carbohydrates: ", round(tot_carb, 2),' gm', file=recipe)
+    print ("Sodium: ", round(tot_sodium, 2),' mg', file=recipe)
+    print ("Sugar: ", round(tot_sugar, 2),' gm', file=recipe)
+    print ("Saturated fat: ", round(Sat_fat, 2),' gm', file=recipe)
+    print ("Cholesterol: ", round(Cholesterol, 2), ' gm', file=recipe)
     recipe.close()
     
 '''This function converts the nutritional values for each nutrient in each
@@ -157,163 +143,41 @@ information for 2 sups flour.  If needed, units (cup, tsp, tbsp) are converted i
 whatever is the most common unit for that ingredient.  For example, a recipe gives
 the flour amount in tbsp, this will be converted into cups (the most commonly
 used unit to measure flour).'''
-def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodium, sugar\
-            , convert_wt, convert_num, convert_unit):
+def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodium, sugar, sat_fat\
+            , cholesterol, convert_wt, convert_num, convert_unit):
     #Convert factors
-    tspInCup= 48.0
-    tbspInCup= 16.0
-    tspInTbsp= 3.0
-    flozInCup= 8.0
-    flozInTbsp= 0.5
-    ozInLb= 16.0
-    
+    convert_val = {'cuptsp': 48.0, 'tspcup': 1/48.0, 'cuptbsp': 16.0, 'tsptbsp': 1/3.0, \
+                   'tbsptsp': 3.0, 'ozcup': 1/8.0, 'oztbsp': 0.5, 'tbspoz': 2.0, \
+                   'cupoz': 8.0, 'ozlb': 1/16.0, 'lboz': 16.0}
+   
     ing_list= [float(calories), float(protein), float(fat), float(carbohydrates)\
-               , float(sodium), float(sugar)]
-    
+               , float(sodium), float(sugar), float(sat_fat), float(cholesterol)]
+   
     convert_val= float
     convert_wt= float(convert_wt)
     convert_num = float(convert_num)
     converted_ing= []
 
     if unit == convert_unit:
-    
+   
         convert_wt = (convert_wt/convert_num) * amount
         convert_val = convert_wt / 100
-        
+       
         for i in ing_list:
             i = i * convert_val
             i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
+   
+    else:
+        val = unit + convert_unit
+        amount = amount * convert_val[val]
 
-    if unit == "cup" and convert_unit == "tbsp":
-    
-        convert_wt = (convert_wt/convert_num) * (amount * tbspInCup)
+        convert_wt = (convert_wt/convert_num) * amount
         convert_val = convert_wt / 100
-        
+           
         for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i, 2))
-        return converted_ing
-        
-    if unit == "cup" and convert_unit == "tsp":
-    
-        convert_wt = (convert_wt/convert_num) * (amount * tspInCup)
-        convert_val = convert_wt / 100
-        
-        for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "tsp" and convert_unit == "cup":
-
-        convert_wt = (convert_wt/convert_num) * (amount / tspInCup)
-        convert_val = convert_wt / 100
-        
-        for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "tsp" and convert_unit == "tbsp":
-
-        convert_wt = (convert_wt/convert_num) * (amount / tspInTbsp)
-        convert_val = convert_wt / 100
-
-        for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i,2))
-        return converted_ing
-
-    if unit == "tbsp" and convert_unit == "cup":
-    
-        convert_wt = (convert_wt/convert_num) * (amount / tbspInCup)
-        convert_val = convert_wt / 100    
-    
-        for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "tbsp" and convert_unit == "tsp":
-    
-        convert_wt = (convert_wt/convert_num) * (amount * tspInTbsp)
-        convert_val = convert_wt / 100
-    
-        for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "oz" and convert_unit == "tbsp":
-    
-        convert_wt = (convert_wt/convert_num) * (amount * flozInTbsp)
-        convert_val = convert_wt / 100
-    
-        for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "oz" and convert_unit == "cup":
-    
-        convert_wt = (convert_wt/convert_num) * (amount / flozInCup)
-        convert_val = convert_wt / 100
-    
-        for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "tbsp" and convert_unit == "oz":
-    
-        convert_wt = (convert_wt/convert_num) * (amount / flozInTbsp)
-        convert_val = convert_wt / 100
-    
-        for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i,2))
-        return converted_ing
-
-    if unit == "cup" and convert_unit == "oz":
-    
-        convert_wt = (convert_wt/convert_num) * (amount * flozInCup)
-        convert_val = convert_wt / 100
-    
-        for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "oz" and convert_unit == "lb":
-    
-        convert_wt = (convert_wt/convert_num) * (amount / ozInLb)
-        convert_val = convert_wt / 100
-    
-        for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "lb" and convert_unit == "oz":
-    
-        convert_wt = (convert_wt/convert_num) * (amount * ozInLb)
-        convert_val = convert_wt / 100
-    
-        for i in ing_list:
-            i = i * convert_val
+            i = i * convert_val[val]
             i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
@@ -360,13 +224,13 @@ def id_grabber(title):
 #Writes ingredients to ingredients.sqlite.  Also adds recipe_id so ingredients can
 #be retrieved.
 def ingredient_write_dbase(recipe_id, amount, unit, ingredient, converted_ingr):
-    calories, protein, fat, carbohydrates, sodium, sugar= converted_ingr
+    calories, protein, fat, carbohydrates, sodium, sugar, sat_fat, cholesterol= converted_ingr
     conn= sqlite3.connect("ingredients.sqlite")
     try:
         c=conn.cursor()
         try:
-            c.execute("INSERT INTO ingredient (recipe_id, amount, unit, ingredient, calories, protein, fat, carbohydrates, sodium, sugar)\
-                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (recipe_id, amount, unit, ingredient, calories, protein, fat, carbohydrates, sodium, sugar,))
+            c.execute("INSERT INTO ingredient (recipe_id, amount, unit, ingredient, calories, protein, fat, carbohydrates, sodium, sugar, sat_fat, cholesterol)\
+                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (recipe_id, amount, unit, ingredient, calories, protein, fat, carbohydrates, sodium, sugar, sat_fat, cholesterol))
             conn.commit()
         finally:
             c.close()
