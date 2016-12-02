@@ -30,43 +30,51 @@ def main():
     tot_sat_fat= float(0)
     tot_cholesterol= float(0)
     while more == 'yes':
-        amount = eval(input("Enter amount: "))
+        try:
+            amount = int(input("Enter amount: "))
+        except ValueError:
+            print("You must enter an integer.  Try agan.")
+            amount = int(input("Enter amount: "))
         unit = input("Enter the unit(I.E.- cup, tsp); ")
-        ingredient = input("Enter the ingredient: ")
-        ingredients =[]
-        description, calories, protein, fat, carbohydrates, sodium,\
-            sugar, sat_fat, cholesterol, convert_wt, convert_num, convert_unit=\
-            nutr_grabber(ingredient)
-        while description== None:
-            print("Ingredient not found in database.  Try again: ")
-            ingredient = input("Enter the ingredient: ")
-            description, calories, protein, fat, carbohydrates, sodium,\
-            sugar, sat_fat, cholesterol, convert_wt, convert_num, convert_unit=\
-            nutr_grabber(ingredient)
+        while unit !="cup" and unit !="tsp" and unit !="oz" and unit !="tbsp":
+            print("Accepted units are 'cup', 'tsp', 'tbsp', or 'oz'.  Try again'")
+            unit = input("Enter the unit(I.E.- cup, tsp); ")
         else:
-            converted_ingr= convert(amount, servSize, unit, calories, protein, fat,\
-                                    carbohydrates, sodium, sugar, sat_fat, cholesterol, convert_wt,\
-                                    convert_num, convert_unit)
-            recipe_id= id_grabber(title)
-            ingredient_write_dbase(recipe_id, amount, unit, ingredient, converted_ingr)
-            ingredients = [amount, unit, ingredient, converted_ingr]            
-            recipe.append(ingredients)
-            recipe_write(amount, unit, description)
-            tot_calories= tot_calories + converted_ingr[0]
-            tot_protein = tot_protein + converted_ingr[1]
-            tot_fat = tot_fat + converted_ingr[2]
-            tot_carb = tot_carb + converted_ingr[3]
-            tot_sodium= tot_sodium + converted_ingr[4]
-            tot_sugar= tot_sugar + converted_ingr[5]
-            tot_sat_fat= tot_sat_fat + converted_ingr[6]
-            tot_cholesterol= tot_cholesterol + converted_ingr[7]
-            more = input("More ingredients? (Enter 'yes' or 'no'):")
-            while more != 'yes' and more != 'no':
-                print("You must enter either 'yes' or 'no'.  Try again...")
-                more = input("More ingredients? (Enter 'yes' or 'no'):") 
-    nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, tot_sat_fat, tot_cholesterol, servSize)
-    num_ingr = len(recipe)-1
-    recipe.append(num_ingr)
+            ingredient = input("Enter the ingredient: ")
+            ingredients =[]
+            description, calories, protein, fat, carbohydrates, sodium,\
+                sugar, sat_fat, cholesterol, convert_wt, convert_num, convert_unit=\
+                nutr_grabber(ingredient)
+            while description== None:
+                print("Ingredient not found in database.  Try again: ")
+                ingredient = input("Enter the ingredient: ")
+                description, calories, protein, fat, carbohydrates, sodium,\
+                sugar, sat_fat, cholesterol, convert_wt, convert_num, convert_unit=\
+                nutr_grabber(ingredient)
+            else:
+                converted_ingr= convert(amount, servSize, unit, calories, protein, fat,\
+                                        carbohydrates, sodium, sugar, sat_fat, cholesterol, convert_wt,\
+                                        convert_num, convert_unit)
+                recipe_id= id_grabber(title)
+                ingredient_write_dbase(recipe_id, amount, unit, ingredient, converted_ingr)
+                ingredients = [amount, unit, ingredient, converted_ingr]            
+                recipe.append(ingredients)
+                recipe_write(amount, unit, description)
+                tot_calories= tot_calories + converted_ingr[0]
+                tot_protein = tot_protein + converted_ingr[1]
+                tot_fat = tot_fat + converted_ingr[2]
+                tot_carb = tot_carb + converted_ingr[3]
+                tot_sodium= tot_sodium + converted_ingr[4]
+                tot_sugar= tot_sugar + converted_ingr[5]
+                tot_sat_fat= tot_sat_fat + converted_ingr[6]
+                tot_cholesterol= tot_cholesterol + converted_ingr[7]
+                more = input("More ingredients? (Enter 'yes' or 'no'):")
+                while more != 'yes' and more != 'no':
+                    print("You must enter either 'yes' or 'no'.  Try again...")
+                    more = input("More ingredients? (Enter 'yes' or 'no'):") 
+        nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, tot_sat_fat, tot_cholesterol, servSize)
+        num_ingr = len(recipe)-1
+        recipe.append(num_ingr)
 
 '''Submits the ingredient name and returns the nutritional information.'''
 def nutr_grabber(ingredient):
