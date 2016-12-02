@@ -11,7 +11,11 @@ import sqlite3
 def main():
     recipe =[]
     title= input("Enter the recipe title: ")
-    servSize= eval(input("Enter the serving size: "))
+    try:
+        servSize= int(input("Enter the serving size: "))
+    except ValueError:
+        print("You must enter an integer.  Try again.")
+        servSize= eval(input("Enter the serving size: "))
     recipe_write_dbase(title, servSize)
     recipe.append(title)
     recipe.append(servSize)

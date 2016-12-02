@@ -29,11 +29,17 @@ def main():
         amount = eval(input("Enter amount: "))
         unit = input("Enter the unit(I.E.- cup, tsp); ")
         ingredient = input("Enter the ingredient: ")
-        if ingredient:
-            ingredients =[]
+        ingredients =[]
+        description, calories, protein, fat, carbohydrates, sodium,\
+            sugar, sat_fat, cholesterol, convert_wt, convert_num, convert_unit=\
+            nutr_grabber(ingredient)
+        while description== None:
+            print("Ingredient not found in database.  Try again: ")
+            ingredient = input("Enter the ingredient: ")
             description, calories, protein, fat, carbohydrates, sodium,\
-                sugar, sat_fat, cholesterol, convert_wt, convert_num, convert_unit=\
-                nutr_grabber(ingredient)
+            sugar, sat_fat, cholesterol, convert_wt, convert_num, convert_unit=\
+            nutr_grabber(ingredient)
+        else:
             converted_ingr= convert(amount, servSize, unit, calories, protein, fat,\
                                     carbohydrates, sodium, sugar, sat_fat, cholesterol, convert_wt,\
                                     convert_num, convert_unit)
@@ -50,8 +56,11 @@ def main():
             tot_sugar= tot_sugar + converted_ingr[5]
             tot_sat_fat= tot_sat_fat + converted_ingr[6]
             tot_cholesterol= tot_cholesterol + converted_ingr[7]
-            
             more = input("More ingredients? (Enter 'yes' or 'no'):")
+            while more != 'yes' and more != 'no':
+                print("You must enter either 'yes' or 'no'.  Try again...")
+                more = input("More ingredients? (Enter 'yes' or 'no'):")    
+           
     nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, tot_sat_fat, tot_cholesterol)
     num_ingr = len(recipe)-1
     recipe.append(num_ingr)
@@ -78,6 +87,7 @@ def nutr_grabber(ingredient):
                 convert_wt= row[13]
                 convert_num= row[14]
                 convert_unit= row[15]
+
                 
             else:
                 description = None
@@ -92,7 +102,6 @@ def nutr_grabber(ingredient):
                 convert_wt= None
                 convert_num= None
                 convert_unit= None
-
         finally:
             c.close()
 
