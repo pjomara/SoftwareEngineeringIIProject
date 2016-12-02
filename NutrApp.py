@@ -146,160 +146,38 @@ used unit to measure flour).'''
 def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodium, sugar, sat_fat\
             , cholesterol, convert_wt, convert_num, convert_unit):
     #Convert factors
-    tspInCup= 48.0
-    tbspInCup= 16.0
-    tspInTbsp= 3.0
-    flozInCup= 8.0
-    flozInTbsp= 0.5
-    ozInLb= 16.0
-    
+    convert_val = {'cuptsp': 48.0, 'tspcup': 1/48.0, 'cuptbsp': 16.0, 'tsptbsp': 1/3.0, \
+                   'tbsptsp': 3.0, 'ozcup': 1/8.0, 'oztbsp': 0.5, 'tbspoz': 2.0, \
+                   'cupoz': 8.0, 'ozlb': 1/16.0, 'lboz': 16.0}
+   
     ing_list= [float(calories), float(protein), float(fat), float(carbohydrates)\
                , float(sodium), float(sugar), float(sat_fat), float(cholesterol)]
-    
+   
     convert_val= float
     convert_wt= float(convert_wt)
     convert_num = float(convert_num)
     converted_ing= []
 
     if unit == convert_unit:
-    
+   
         convert_wt = (convert_wt/convert_num) * amount
         convert_val = convert_wt / 100
-        
+       
         for i in ing_list:
             i = i * convert_val
             i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
+   
+    else:
+        val = unit + convert_unit
+        amount = amount * convert_val[val]
 
-    if unit == "cup" and convert_unit == "tbsp":
-    
-        convert_wt = (convert_wt/convert_num) * (amount * tbspInCup)
+        convert_wt = (convert_wt/convert_num) * amount
         convert_val = convert_wt / 100
-        
+           
         for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i, 2))
-        return converted_ing
-        
-    if unit == "cup" and convert_unit == "tsp":
-    
-        convert_wt = (convert_wt/convert_num) * (amount * tspInCup)
-        convert_val = convert_wt / 100
-        
-        for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "tsp" and convert_unit == "cup":
-
-        convert_wt = (convert_wt/convert_num) * (amount / tspInCup)
-        convert_val = convert_wt / 100
-        
-        for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "tsp" and convert_unit == "tbsp":
-
-        convert_wt = (convert_wt/convert_num) * (amount / tspInTbsp)
-        convert_val = convert_wt / 100
-
-        for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i,2))
-        return converted_ing
-
-    if unit == "tbsp" and convert_unit == "cup":
-    
-        convert_wt = (convert_wt/convert_num) * (amount / tbspInCup)
-        convert_val = convert_wt / 100    
-    
-        for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "tbsp" and convert_unit == "tsp":
-    
-        convert_wt = (convert_wt/convert_num) * (amount * tspInTbsp)
-        convert_val = convert_wt / 100
-    
-        for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "oz" and convert_unit == "tbsp":
-    
-        convert_wt = (convert_wt/convert_num) * (amount * flozInTbsp)
-        convert_val = convert_wt / 100
-    
-        for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "oz" and convert_unit == "cup":
-    
-        convert_wt = (convert_wt/convert_num) * (amount / flozInCup)
-        convert_val = convert_wt / 100
-    
-        for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "tbsp" and convert_unit == "oz":
-    
-        convert_wt = (convert_wt/convert_num) * (amount / flozInTbsp)
-        convert_val = convert_wt / 100
-    
-        for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i,2))
-        return converted_ing
-
-    if unit == "cup" and convert_unit == "oz":
-    
-        convert_wt = (convert_wt/convert_num) * (amount * flozInCup)
-        convert_val = convert_wt / 100
-    
-        for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "oz" and convert_unit == "lb":
-    
-        convert_wt = (convert_wt/convert_num) * (amount / ozInLb)
-        convert_val = convert_wt / 100
-    
-        for i in ing_list:
-            i = i * convert_val
-            i = i / float(servSize)
-            converted_ing.append(round(i, 2))
-        return converted_ing
-
-    if unit == "lb" and convert_unit == "oz":
-    
-        convert_wt = (convert_wt/convert_num) * (amount * ozInLb)
-        convert_val = convert_wt / 100
-    
-        for i in ing_list:
-            i = i * convert_val
+            i = i * convert_val[val]
             i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
