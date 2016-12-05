@@ -1,11 +1,5 @@
-// This does basically the same as the quick search, except:
-// A total for all the nutrients is added.
-// the submit button and recipe name are disabled until the user presses "done adding..". This is to prevent users from
-//accidentally pressing submit instead of "add ingredient" or such.
-
-//Added a short display message to let the user know their ingredient was successfully added.
-//Formatted the passed nutrients and name to new layout for proper formatting.
-//Also clears the text boxes so user doesn't have to manually do it
+// added a makeToast message instead of an alert dialog; user doesnt need to click on screen --> faster
+//Array list for ingredients is declared as a static so I don't need to pass the items individually and can just be accessed by the necessary activity
 
 
 using System;
@@ -59,7 +53,8 @@ namespace NutriApp
         double totChol;
         double totSugar;
 
-
+        public static List<string> ingredList;
+        
 
         // Android needs a database to be copied from assets to a useable location in inernal memory
         public void copyDataBase()
@@ -123,6 +118,8 @@ namespace NutriApp
             recipeName.Enabled = false;
             submit.Enabled = false;
 
+            ingredList = new List<string>();
+
             //open sqlite connection, create table
             var Path = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "USDADataProto.db");
             var db = new SQLiteConnection(Path);
@@ -149,6 +146,7 @@ namespace NutriApp
             {
                 autoIngs.Add(auto.Shrt_Desc);
             }
+            
             //When the text in the text-box changes, populate the auto-complete suggestions 
             // with the name of the ingredients from the array
             autoIngred.TextChanged += delegate
@@ -168,7 +166,8 @@ namespace NutriApp
                 str1 = autoIngred.Text;
                 str1 = str1.TrimEnd();
                 str1 = str1.ToUpper();
-
+                
+                //converts form string to double for math operations
                 amountEntered = Convert.ToDouble(amount.Text);
 
 
@@ -354,11 +353,8 @@ namespace NutriApp
                 amount.Text = "";
                 autoIngred.Text = "";
 
-                ////  var third = new Intent(this, typeof(iReList));
-                //  third.PutExtra("name", Convert.ToString(name));
-                //  third.PutExtra("num", Convert.ToString(amountEntered));
-                //  third.PutExtra("unit", unitEntered);
 
+                ingredList.Add(amountEntered + " " + unitEntered + " of " + name);
 
                 //gives user a message to let them know it was succesfully added
                 string toastMessage = amountEntered + " " + unitEntered + "/s of " + name + " added to recipe";
@@ -378,7 +374,7 @@ namespace NutriApp
             {
                 rName = recipeName.Text;
                 // sets the intent to pass the info to listdisplay activity
-                var second = new Intent(this, typeof(nReList));
+                var second = new Intent(this, typeof(recipeOptions));
                 // passes items to second activity, then launches the new activity
                 second.PutExtra("rName", Convert.ToString(rName));
                 second.PutExtra("Kcal", Convert.ToString(totCal));
