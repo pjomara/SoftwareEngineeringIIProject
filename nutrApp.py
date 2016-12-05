@@ -199,7 +199,6 @@ def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodiu
     ing_list= [float(calories), float(protein), float(fat), float(carbohydrates)\
                , float(sodium), float(sugar), float(sat_fat), float(cholesterol)]
    
-    convert_val= float
     convert_wt= float(convert_wt)
     convert_num = float(convert_num)
     converted_ing= []
