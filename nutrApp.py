@@ -14,7 +14,7 @@ def main():
     try:
         servSize= int(input("Enter the serving size: "))
     except ValueError:
-        print("You must enter an interger.  Try again.")
+        print("You must enter an integer.  Try again.")
         servSize= int(input("Enter the serving size: "))
     recipe_write_dbase(title, servSize)
     recipe.append(title)
@@ -33,7 +33,7 @@ def main():
         try:
             amount = int(input("Enter amount: "))
         except ValueError:
-            print("You must enter an integer.  Try agan.")
+            print("You must enter an integer.  Try again.")
             amount = int(input("Enter amount: "))
         unit = input("Enter the unit(I.E.- cup, tsp); ")
         while unit !="cup" and unit !="tsp" and unit !="oz" and unit !="tbsp":
@@ -72,9 +72,9 @@ def main():
                 while more != 'yes' and more != 'no':
                     print("You must enter either 'yes' or 'no'.  Try again...")
                     more = input("More ingredients? (Enter 'yes' or 'no'):") 
-        nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, tot_sat_fat, tot_cholesterol, servSize)
-        num_ingr = len(recipe)-1
-        recipe.append(num_ingr)
+    nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, tot_sat_fat, tot_cholesterol, servSize)
+    num_ingr = len(recipe)-1
+    recipe.append(num_ingr)
 
 '''Submits the ingredient name and returns the nutritional information.'''
 def nutr_grabber(ingredient):
