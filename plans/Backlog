@@ -108,3 +108,21 @@
             Add a tab to the interface
                 -By adding a tab to our interface, you will be able to go back and forth from an ingredients nutritional information and the
                  nutritional information for the entire recipe.
+
+
+12/5/16     --UPDATE -- Added tabs to the interface
+                        Finished formatting the nutrition label in the text file (Added more fields and %dv)
+                        Added error handling if the ingredient isn't in the database
+                        Fixed the shorter conversions code
+12/5/16
+            Work on more error handling
+                -We are working on adding error handling for every field the user enters. It will instruct the user how to enter their input
+                 so it will run correctly.
+            Adding more to the interface
+                -We added the tabs to the interface but they are now bringing up errors. Steven is looking to fix this and add more 
+                 functionality to the interface so it better matches the functionality of the python code.
+            Documentation
+                -Add further documentation explaining how to run and work our program, what it does, and any other useful information.
+            Commenting
+                -Going through the code to make sure that it contains enough useful comments so that someone who didn't work on the project 
+                 will know what each piece of code does what.
