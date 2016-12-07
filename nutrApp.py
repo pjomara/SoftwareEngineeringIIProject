@@ -13,7 +13,12 @@ def main():
     recipe =[]
     """Gets the recipe name and serving size and writes them to recipe"""
     title= input("Enter the recipe title: ")
-    servSize= eval(input("Enter the serving size: "))
+    """Error checking for the serving size"""
+    try:
+        servSize= int(input("Enter the serving size: "))
+    except ValueError:
+        print("You must enter an integer.  Try again.")
+        servSize= eval(input("Enter the serving size: "))
     recipe_write_dbase(title, servSize)
     recipe.append(title)
     recipe.append(servSize)
@@ -30,14 +35,31 @@ def main():
     tot_cholesterol= float(0)
     """Keeps taking ingredients from the user as long as they keep entering yes for more"""
     while more == 'yes':
-        amount = eval(input("Enter amount: "))
+        """Error checking for ingredient amount"""
+        try:
+            amount = int(input("Enter amount: "))
+        except ValueError:
+            print("You must enter an integer.  Try again.")
+            amount = int(input("Enter amount: "))
+        """Error checking for the unit"""
         unit = input("Enter the unit(I.E.- cup, tsp); ")
-        ingredient = input("Enter the ingredient: ")
-        ingredients =[]
-        description, calories, protein, fat, carbohydrates, sodium,\
-            sugar, sat_fat, cholesterol, convert_wt, convert_num, convert_unit=\
-            """Grabs the nutrition information from the database"""
-            nutr_grabber(ingredient)
+        while unit !="cup" and unit !="tsp" and unit !="oz" and unit !="tbsp":
+            print("Accepted units are 'cup', 'tsp', 'tbsp', or 'oz'.  Try again'")
+            unit = input("Enter the unit(I.E.- cup, tsp); ")
+        else:
+            ingredient = input("Enter the ingredient: ")
+            ingredients =[]
+            description, calories, protein, fat, carbohydrates, sodium,\
+                sugar, sat_fat, cholesterol, convert_wt, convert_num, convert_unit=\
+                nutr_grabber(ingredient)
+            while description== None:
+                """Error checking for ingredient name"""
+                print("Ingredient not found in database.  Try again: ")
+                ingredient = input("Enter the ingredient: ")
+                description, calories, protein, fat, carbohydrates, sodium,\
+                sugar, sat_fat, cholesterol, convert_wt, convert_num, convert_unit=\
+                """Grabs the nutrition information from the database"""
+                nutr_grabber(ingredient)
         """If the ingredient doesn't have a description, an error is returned saying
         that the ingredient isn't in the database"""
         while description== None:
@@ -74,7 +96,7 @@ def main():
                 print("You must enter either 'yes' or 'no'.  Try again...")
                 more = input("More ingredients? (Enter 'yes' or 'no'):")    
     """Writes the nutrition label given the nutrition information"""       
-    nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, tot_sat_fat, tot_cholesterol)
+    nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, tot_sat_fat, tot_cholesterol, servSize)
     num_ingr = len(recipe)-1
     """Appends onto the recipe the number of ingredients"""
     recipe.append(num_ingr)
@@ -139,7 +161,7 @@ def recipe_write(amount, unit, description):
     recipe.close()
 
 """Prints nutritional label to recipe_book.txt"""
-def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, Sat_fat, Cholesterol, servSize,):
+def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, Sat_fat, Cholesterol, servSize):
 
     tot_ft_dv =65.0
     tot_chol_dv =300.0
@@ -214,7 +236,7 @@ def convert(amount, servSize, unit, calories, protein, fat, carbohydrates, sodiu
             i = i / float(servSize)
             converted_ing.append(round(i, 2))
         return converted_ing
-   """If the unit given by the user is different from the unit in the database then you need to convert
+    """If the unit given by the user is different from the unit in the database then you need to convert
       units before you can convert the ingredients values"""
     else:
         val = unit + convert_unit
