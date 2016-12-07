@@ -163,18 +163,25 @@ def recipe_write(amount, unit, description):
 """Prints nutritional label to recipe_book.txt"""
 def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sugar, Sat_fat, Cholesterol, servSize):
 
+    ing_list= [float(tot_calories), float(tot_protein), float(tot_fat), float(tot_carb)\
+               , float(tot_sodium), float(tot_sugar), float(Sat_fat), float(Cholesterol)]
+    nutr_lbl= []
+
+    for i in ing_list:
+            i = i / servSize
+            nutr_lbl.append(i)
+
     tot_ft_dv =65.0
     tot_chol_dv =300.0
     tot_sod_dv =2400.0
     tot_carb_dv =300.0
     tot_prot_dv =50.0
 
-    ft_dv= (tot_fat/tot_ft_dv)*100
-    chol_dv= (Cholesterol/tot_chol_dv)*100
-    sod_dv= (tot_sodium/tot_sod_dv)*100
-    carb_dv= (tot_carb/tot_carb_dv)*100
-    prot_dv= (tot_protein/tot_prot_dv)*100
-    sod_dv= (tot_sodium/tot_sod_dv)*100
+    ft_dv= (nutr_lbl[2]/tot_ft_dv)*100
+    chol_dv= (nutr_lbl[7]/tot_chol_dv)*100
+    sod_dv= (nutr_lbl[4]/tot_sod_dv)*100
+    carb_dv= (nutr_lbl[3]/tot_carb_dv)*100
+    prot_dv= (nutr_lbl[1]/tot_prot_dv)*100
     
     """Opens recipe_book.txt to write the label"""
     recipe= open("recipe_book.txt", "a")
@@ -185,23 +192,23 @@ def nutr_write(tot_calories, tot_protein, tot_fat, tot_carb, tot_sodium, tot_sug
     print ("_______________________________", file=recipe)
     print ("Serving Size ", int(servSize), file=recipe)
     print ("_______________________________", file=recipe)
-    print ("Calories ", int(tot_calories), file=recipe)
+    print ("Calories ", int(nutr_lbl[0]), file=recipe)
     print ("_______________________________", file=recipe)
     print ("                 % Daily Value*", file=recipe)
     print ("_______________________________", file=recipe)
-    print ("Total Fat ", int(tot_fat), "g          ", int(ft_dv),"%", file=recipe)
+    print ("Total Fat ", int(nutr_lbl[2]), "g          ", int(ft_dv),"%", file=recipe)
     print ("_______________________________", file=recipe)
-    print ("   Saturated Fat ", int(Sat_fat), "g",  file=recipe)
+    print ("   Saturated Fat ", int(nutr_lbl[6]), "g",  file=recipe)
     print ("_______________________________", file=recipe)
-    print ("Cholesterol ", int(Cholesterol), "mg         ", int(chol_dv), "%", file=recipe)
+    print ("Cholesterol ", int(nutr_lbl[7]), "mg         ", int(chol_dv), "%", file=recipe)
     print ("_______________________________", file=recipe)
-    print ("Sodium ", int(tot_sodium), "mg           ", int(sod_dv), "%", file=recipe)
+    print ("Sodium ", int(nutr_lbl[4]), "mg           ", int(sod_dv), "%", file=recipe)
     print ("_______________________________", file=recipe)
-    print ("Carbohydrates ", int(tot_carb), "g      ", int(carb_dv), "%", file=recipe)
+    print ("Carbohydrates ", int(nutr_lbl[3]), "g      ", int(carb_dv), "%", file=recipe)
     print ("_______________________________", file=recipe)
-    print ("   Sugars ", int(tot_sugar), "g", file=recipe)
+    print ("   Sugars ", int(nutr_lbl[5]), "g", file=recipe)
     print ("_______________________________", file=recipe)
-    print ("Protein ", int(tot_protein), "g             ", int(prot_dv), "%", file=recipe)
+    print ("Protein ", int(nutr_lbl[1]), "g             ", int(prot_dv), "%", file=recipe)
     print ("_______________________________", file=recipe)
     print ("*Daily value percentages are ", file=recipe)
     print ("based on a 2,000 calorie diet ", file=recipe)
