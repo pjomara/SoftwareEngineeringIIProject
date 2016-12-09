@@ -1,24 +1,29 @@
 // Provides the button on the homescreen
 // The home screen just consists of 2 buttons, one for a quick seach and one for a recipe search
-//added colors, making the layout blue buttons on a white backgrounf, instead of all black
+//added colors, making the layout blue buttons on a white background, instead of all black
+// Added an image on the background above the buttons to flesh it out a bit
 
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eff3f6"
-              >
+    android:background="#eff3f6">
+  <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/recipe"
+        android:src="@drawable/recipe"/>
     <Button
         android:text="Quick search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/quickSearchBtn"
-        android:background="#58b4c7"/>
+        android:background="#58b4c7" />
     <Button
         android:text="Make a Recipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/recipeSearchBtn"
-        android:background="#5aa0ba"/>
+        android:background="#5aa0ba" />
 </LinearLayout>
