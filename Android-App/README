@@ -3,9 +3,9 @@ Upon starting the app, the Home screen is launched, allowing the user to select 
 Upon loading the Quick Search, the user can enter the amount they desire, the unit selected from a spinner (to avoid misspellings or entering impossible units), and as they begin to type their ingredient, the auto-complete text will begin to show them ingredients that contain their typing.
 After submitting a new page will load saying " the amount unit of this ingredient" and then list the nutrients of their ingredient.
 
-Upon loading Recipe, the user will do the same as Quick Search, enter the amount, the unit and type and selsect their ingredient, then add the ingredient to the recipe.
+Upon loading Recipe, the user will do the same as Quick Search, enter the amount, the unit and type and select their ingredient, then add the ingredient to the recipe.
 Submitting that ingredient will display a quick message saying it was successfully added. The text boxes are then reset so user doesn't have to manually clear and re-enter.
-After adding desired ingredients, the user will press "done adding ingredients" which unloks the "recipe name" box, and the final submit button.
+After adding desired ingredients, the user will press "done adding ingredients" which unlocks the "recipe name" box, and the final submit button.
 After adding a recipe name and clicking done, the user is taken to the recipe options page, where they then select to view ingredients or nutrients.
 
 Clicking nutrients will show the totals of the nutrients for the added ingredients, as well as the recipe name.
