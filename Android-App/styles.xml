@@ -1,0 +1,16 @@
+//This res/values folder contains some color designs to color buttons. Eventually it would contain any color to be used for the app.
+
+<?xml version="1.0" encoding="utf-8" ?>
+
+<style name="MyButton" parent="android:Widget.Button">
+  <item name="android:layout_width">fill_parent</item>
+  <item name="android:layout_height">wrap_content</item>
+</style>
+
+<style name="MyButton.Orange">
+  <item name="android:background">#ff5722</item>
+</style>
+
+<style name="MyButton.Blue">
+  <item name="android:background">#5aa0ba</item>
+</style>
