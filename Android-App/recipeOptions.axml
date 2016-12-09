@@ -1,18 +1,22 @@
 //layout for loading the options buttons
+// changed color schema to a nice grey and orange
 
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#bfcbd0">
     <Button
         android:text="Nutrients"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ntrBtn" />
+        android:id="@+id/ntrBtn"
+        android:background="#ff5722"/>
     <Button
         android:text="Ingredients"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ingBtn" />
+        android:id="@+id/ingBtn"
+        android:background="#607d8b"/>
 </LinearLayout>
